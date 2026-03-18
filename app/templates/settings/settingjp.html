@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>支払いシステムの設定</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.css') }}"/>
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700|Roboto:400,700&display=swap" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link  href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{{ url_for('static',filename='css/responsive.css') }}" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <div class="navbar-brand">
+            <img src="" alt="" />
+            <span>
+              支払いシステムの設定
+            </span>
+          </div>
+          <div class="row" style="margin-left: auto;">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                日本語
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item active" href="#" >日本語</a>
+                <a class="dropdown-item" href="/settings-page?lang=en">英語</a>
+              </div>
+            </div>
+            <a href={{papercutConfig.paperCutServer}}>
+              <button type="button" class="btn btn-success ml-1">PaperCutへ戻る</button>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    
+    <!-- end header section -->
+
+
+  </div>
+
+
+  <!-- PaperCut Connection Setting -->
+  <section class="contact_section">
+    <div class="container-fluid">
+      <!-- Modal -->
+      {% if message != '' %}
+          {% if "Success" in message or "成功" in message%}
+          <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-dark" id="exampleModalLabel">成功しました！</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-dark">
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{message}}
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-dark" id="exampleModalLabel">失敗しました！</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="alert alert-danger alert alert-dismissible fade show" role="alert">
+                    {{message}}
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+      {%endif%}
+      
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <h2 class="custom_heading">
+            PaperCutへの接続設定
+            <a href='/download-application-logs-zip'>
+                  <button type="button" class="btn btn-dark ml-1">アップリログをダウンロード</button>
+            </a>
+          </h2>
+          <form action="/update-papercut-settings" method="post">
+            <input id="lang2" required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="jp" hidden>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">PaperCut サーバー</label>
+                <input required name="primary_server" type="text" class="form-control" id="formGroupExampleInput" placeholder="正しいPaperCutプライマリサーバーを入力してください" value="{{papercutConfig.paperCutServer}}">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">PaperCut 認証トークン (Auth Token) </label>
+                <div class="input-group mb-3">
+                    <input required name="auth_token" id="ppc-token" class="form-control" type="password" placeholder="正しいPaperCut認証トークン (Auth Token) を入力してください"  value="{{papercutConfig.paperCutAuthToken}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="button-addon2"id="preview-ppc-token" onclick="displayPaperCutToken()">表示</button>
+                </div>
+            <div>
+            <div class="d-flex  mt-4 ">
+              <button class="btn btn-primary">
+                PaperCut接続設定を更新する
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PayPay Connection Settings -->
+   {% if papercutConfig.paperCutServer != '' %}
+  <section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <hr style="border: 0.5px solid white;">
+          <h2 class="custom_heading">PayPayへの接続設定</h2>
+          <form action="/update-paypay-settings" method="post">
+            <input id="lang3" required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="jp" hidden>
+            <div class="mb-3">
+              <label for="formGroupExampleInput" class="form-label">PayPay APIキー</label>
+              <div class="input-group mb-3">
+                  <input required name="paypay_api_key" id="paypay_api_key" class="form-control" type="password" placeholder="正しい PayPayのAPIキー を入力してください"  value="{{paypayConfig.paypayAPIKey}}" aria-describedby="button-addon2"/>
+                  <button class="btn btn-secondary" type="button" id="button-addon2"id="preview-ppc-token" onclick="displayPaypayAPIKey()">表示</button>
+              </div>
+            <div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">PayPay APIシークレット</label>
+                <div class="input-group mb-3">
+                    <input required name="paypay_api_secret" id="paypay_api_secret" class="form-control" type="password" placeholder="正しい PayPayのAPIシークレット を入力してください"  value="{{paypayConfig.paypayAPISecret}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="button-addon2"id="preview-ppc-token" onclick="displayPaypayAPISecret()">表示</button>
+                </div>
+            <div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">PayPay マーチャントの識別子(merchantID)</label>
+                <div class="input-group mb-3">
+                    <input required name="paypay_merchant_id" id="paypay_merchant_id" class="form-control" type="password" placeholder="正しい PayPayのマーチャントID を入力してください"  value="{{paypayConfig.paypayMerchantId}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="button-addon2"id="preview-ppc-token" onclick="displayPaypayMerchantId()">表示</button>
+                </div>
+            <div>
+            <div class="d-flex  mt-4 ">
+              <button class="btn btn-primary">
+                PayPay接続設定を更新する
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Payment Transaction Setting -->
+  <section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <hr style="border: 0.5px solid white;">
+          <div class="row align-middle">
+            <div class="col-12">
+              <h2 class="custom_heading">
+                ポイントチャージ取引設定
+                <a href='/download-transaction-logs-csv'>
+                  <button type="button" class="btn btn-dark ml-1">チャージログをダウンロード</button>
+                </a>
+              </h2>
+              
+            </div>
+          </div>
+          <form action="/update-topup-settings" method="post" enctype="multipart/form-data">
+            <label for="basic-url">ユーザー画面に表示される請求金額選択リスト。サンプル CSV ファイルをダウンロードするには、<a class="text-dark" href="/download-payment-settings-sample"><strong>ここをクリックしてください。</strong></a></label>
+            <label for="basic-url">設定をアップロードする際は、ファイル名が <strong>point_price.csv</strong> であることを確認してください。</label>
+            <input id="lang5" required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="jp" hidden>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" required accept=".csv" name="price_settings" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" onchange="changeFileInputText(this)">
+                <label class="custom-file-label" for="inputGroupFile04" id="fileNameDisplay">設定ファイル選択</label>
+              </div>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">設定をアップロード</button>
+              </div>
+            </div>
+          </form>
+          <br>
+          <div class="ml-3 mr-3">
+            <table class="table table-small table-light table-bordered table-hover">
+              <caption class="text-white">{{paymentConfig.messagejp}}</caption>
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">価格 (￥)</th>
+                  <th scope="col">ポイント</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in paymentConfig.data %}
+                <tr>
+                  <th scope="row">{{data.index}}</th>
+                  <td>￥{{data.price}}</td>
+                  <td>{{data.points}} ポイント</td>
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+
+  <!-- info section -->
+  <section class="info_section layout_padding-top layout_padding2-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="info_contact">
+            <h4>
+              Location
+            </h4>
+            <div>
+              <img src="{{ url_for('static',filename='images/location.png') }}" alt="" />
+              <p>
+                104 loram ipusm
+              </p>
+            </div>
+            <div>
+              <img src="{{ url_for('static',filename='images/telephone.png') }}" alt="" />
+              <p>
+                ( +01 1234567890 )
+              </p>
+            </div>
+            <div>
+              <img src="{{ url_for('static',filename='images/envelope.png') }}" alt="" />
+              <p>
+                demo@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  <footer class="container-fluid footer_section">
+    <p>
+      &copy; 2024 All Rights Reserved By
+      <a href="https://html.design/">COSY Inc</a>
+    </p>
+  </footer>
+  <!-- footer section -->
+
+  <script src= "{{ url_for('static',filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src= "{{ url_for('static',filename='js/bootstrap.js') }}"></script>
+  <script src= "{{ url_for('static',filename='js/circles.min.js') }}"></script>
+  <script src= "{{ url_for('static',filename='js/custom.js') }}" ></script>
+  <script src= "{{ url_for('static',filename='js/settingpage/settingpage.js') }}" ></script>
+
+</body>
+
+</html>

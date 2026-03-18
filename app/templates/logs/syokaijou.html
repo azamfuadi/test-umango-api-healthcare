@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>{{_('Letter of Introduction')}}</title>
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.css') }}" />
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700|Roboto:400,700&display=swap"
+    rel="stylesheet" />
+
+  <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static',filename='css/responsive.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static',filename='css/datatables.min.css') }}" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <div class="navbar-brand">
+            <img src="" alt="" />
+            <span>
+              {{_('Payment System Configuration')}}
+            </span>
+          </div>
+          <div class="row" style="margin-left: auto;">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ current_language|upper  }}  
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for code, name in languages.items() %}
+                    <a href="{{ url_for('set_language', lang=code) }}" class="{% if code == current_language %} dropdown-item active {% else %} dropdown-item {% endif %}">
+                      {{name}} 
+                    </a>
+                {% endfor %}
+              </div>
+            </div>
+            <a href={{paperCutServer}}>
+              <button type="button" class="btn btn-success ml-1">{{_('Back to PaperCut')}}</button>
+            </a>
+            <div class="dropdown">
+              <button class="btn btn-info dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{_('Letter of Introduction')}}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="{{ url_for('set_language', lang=code) }}" class="dropdown-item active">
+                      {{_('Letter of Introduction')}} 
+                    </a>
+                    <a href="{{ url_for('set_language', lang=code) }}" class="dropdown-item">
+                      {{_('Detailed Letter of Introduction')}}
+                    </a>
+                    <a href="{{ url_for('set_language', lang=code) }}" class="dropdown-item">
+                      {{_('Internal Medicine Medical Questionnaire')}} 
+                    </a>
+              </div>
+            </div>
+            <a href="/settings-page">
+              <button type="button" class="btn btn-warning ml-1">{{_('Back to Settings Page')}}</button>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+</div>
+
+<section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <hr style="border: 0.5px solid white;">
+          <h2 class="custom_heading">
+            {{_('Letter of Introduction List')}}
+          </h2>
+            <a href='/export-list-csv?document=syokaijou' >
+                <button type="button" class="btn btn-primary ml-3 mb-2">{{_('Export List')}}</button>
+            </a>
+          <div class="ml-3 mr-3">
+            <table id="example" class="display table table-small table-light table-bordered table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">{{_('Username')}}</th>
+                  <th scope="col">{{_('Date')}}</th>
+                  <th scope="col">{{_('Disease Name')}}</th>
+                  <th scope="col">{{_('Purpose of Introduction')}}</th>
+                  <th scope="col">{{_('Summary')}}</th>
+                  <th scope="col">{{_('File Location')}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in syokaijouList.data %}
+                <tr>
+                  <td>{{loop.index + 1}}</td>
+                  <td>{{data.username}}</td>
+                  <td>{{data.username}}</td>
+                  <td>{{data.date}}</td>
+                  <td>{{data.disease_name}}</td>
+                  <td>{{data.introduction_purpose}}</td>
+                  <td>{{data.summary}}</td>
+                  <td>{{data.file_location}}</td>
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="container-fluid footer_section">
+    <p>
+      &copy; {{_('2014 All Rights Reserved By')}}
+      <a href="https://html.design/">COSY Inc</a>
+    </p>
+  </footer>
+  <script src="{{ url_for('static',filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/circles.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/custom.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/settingpage/settingpage.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/datatables.min.js') }}"></script>
+  <script>
+    $('#example').DataTable( {
+      order: [[0, 'desc']]
+    });
+  </script>
+
+</body>
+
+</html>

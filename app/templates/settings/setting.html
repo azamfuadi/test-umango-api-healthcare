@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>{{_('Payment System Configuration')}}</title>
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.css') }}" />
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700|Roboto:400,700&display=swap"
+    rel="stylesheet" />
+
+  <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static',filename='css/responsive.css') }}" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <div class="navbar-brand">
+            <img src="" alt="" />
+            <span>
+              {{_('Payment System Configuration')}}
+            </span>
+          </div>
+          <div class="row" style="margin-left: auto;">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ current_language|upper  }}  
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for code, name in languages.items() %}
+                    <a href="{{ url_for('set_language', lang=code) }}" class="{% if code == current_language %} dropdown-item active {% else %} dropdown-item {% endif %}">
+                      {{name}} 
+                    </a>
+                {% endfor %}
+              </div>
+            </div>
+            <a href={{papercutConfig.papercut_server}}>
+              <button type="button" class="btn btn-success ml-1">{{_('Back to PaperCut')}}</button>
+            </a>
+            <a href="/logout">
+              <button type="button" class="btn btn-danger ml-1">{{_('Logout')}}</button>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    </div>
+
+
+  
+  <section class="contact_section">
+    <div class="container-fluid">
+      {% if message != '' %}
+          {% if "success" in message or "Success" in message or "成功" in message%}
+          <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-dark" id="exampleModalLabel">{{_('Success !')}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-dark">
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{message}}
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_('Close')}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-dark" id="exampleModalLabel">{{_('Failed !')}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="alert alert-danger alert alert-dismissible fade show" role="alert">
+                    {{message}}
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_('Close')}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+      {%endif%}
+      <div class="row">
+        <div class="col-12 mt-3 mb-3 mr-3">
+          <h2 class="custom_heading">
+            {{_('PaperCut Connection Configuration')}}
+            <a href='/download-application-logs-zip'>
+                  <button type="button" class="btn btn-dark ml-1">{{_('Download Application Logs')}}</button>
+            </a>
+          </h2>
+          <form action="/update-papercut-settings" method="post">
+            <input required name="lang" type="text" class="form-control" id="papercutFormLang"  value="en" hidden>
+            <div class="form-group mb-3">
+              <label for="formGroupExampleInput" class="form-label">{{_('PaperCut Server')}}</label>
+              <input required name="primary_server" type="text" class="form-control" id="papercutServer"
+                placeholder="{{_('Enter the correct PaperCut Primary Server')}}" value="{{papercutConfig.papercut_server}}">
+            </div>
+            <div class="form-group mb-3">
+              <label for="formGroupExampleInput" class="form-label">{{_('PaperCut Auth Token')}}</label>
+              <div class="input-group mb-3">
+                <input required name="auth_token" id="ppc-token" class="form-control" type="password"
+                  placeholder="{{_('Enter the correct PaperCut Auth Token')}}" value="{{papercutConfig.paperCutAuthToken}}"
+                  aria-describedby="button-addon2" />
+                <button class="btn btn-secondary" type="button" id="button-addon2" id="preview-ppc-token"
+                  onclick="displayPaperCutToken()">{{_('Display')}}</button>
+              </div>
+              <div>
+                <div class="d-flex  mt-4 ">
+                  <button class="btn btn-primary">
+                    {{_('Update PaperCut Connection Settings')}}
+                  </button>
+                </div>
+          </form>
+          {% if papercutConfig.paperCutServer != '' %}
+          <hr style="border: 0.5px solid white;">
+          <h2 class="custom_heading">{{_('Payment Provider & Multiple Personal Account')}}</h2>
+          <form action="/update-selected-provider" method="post">
+            <input required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="en" hidden>
+            <div class="row">
+              <div class="col  mt-4">
+                  <label class="form-check-label" for="flexSwitchCheckDefault">{{_('Choose Your Payment Gateway')}}</label>
+                  <select name="selected_provider" class="custom-select custom-select-sm">
+                    <option value="paypay" {% if selected_provider == 'paypay' %}selected{% endif %}>{{_('PayPay')}}</option>
+                    <option value="sb" {% if selected_provider == 'sb' %}selected{% endif %}>{{_('SB Payment')}}</option>
+                    <!-- <option value="gmo" {% if selected_provider == 'gmo' %}selected{% endif %}>{{_('GMO')}}</option> -->
+                  </select>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col">
+                  <div class="form-check">
+                      {% if personalAccountConfig.chargeToPersonalAccount != 'Y' %}
+                      <input type="checkbox" class="form-check-input" id="multipleAccountCheckbox">
+                      {% else %}
+                      <input type="checkbox" class="form-check-input" id="multipleAccountCheckbox" checked>
+                      {% endif %}
+                      <label class="form-check-label" for="multipleAccountCheckbox">{{_('Credit the points to multiple personal account (PaperCut Advanced Settings)')}}</label>
+                </div>
+            </div>
+            </div>
+            {% if personalAccountConfig.chargeToPersonalAccount != 'Y' %}
+            <div id="personalAccountTargetForm" class="row mt-2" style="display: none;">
+              <div class="col">
+                  <div class="form-group mb-3">
+                    <label for="formGroupExampleInput" class="form-label">{{_('Charge to this personal account')}}</label>
+                    <input required name="personal_account_charge" type="text" class="form-control" id="personalAccountCharge" placeholder="{{_('Enter the desired personal account')}}" value="{{personalAccountConfig.chargeToPersonalAccount}}" hidden>
+                    <input required name="personal_account_target" type="text" class="form-control" id="personalAccountTarget" placeholder="{{_('Enter the desired personal account')}}" value="{{personalAccountConfig.personalAccountTarget}}">
+                    <small id="emailHelp" class="form-text text-black">{{_('Please enter the exact name of the personal account (case sensitive)')}}</small>
+                  </div>
+            {% else %}
+            <div id="personalAccountTargetForm" class="row mt-2" style="display: block;">
+              <div class="col">
+                  <div class="form-group mb-3">
+                    <label for="formGroupExampleInput" class="form-label">{{_('Charge to this personal account')}}</label>
+                    <input required name="personal_account_charge" type="text" class="form-control" id="personalAccountCharge" placeholder="{{_('Enter the desired personal account')}}" value="{{personalAccountConfig.chargeToPersonalAccount}}" hidden>
+                    <input required name="personal_account_target" type="text" class="form-control" id="personalAccountTarget" placeholder="{{_('Enter the desired personal account')}}" value="{{personalAccountConfig.personalAccountTarget}}">
+                    <small id="emailHelp" class="form-text text-black">{{_('Please enter the exact name of the personal account (case sensitive)')}}</small>
+                  </div>
+            {% endif %}
+              </div>
+            </div>
+              <div class="d-flex  mt-4 ">
+                <button class="btn btn-primary">
+                    {{_('Update Top-Up Transaction Settings')}}
+                </button>
+              </div>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if selected_provider == 'paypay' %}
+  <section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <hr style="border: 0.5px solid white;">
+          <h2 class="custom_heading">{{_('PayPay Connection Settings')}}</h2>
+          <form action="/update-paypay-settings" method="post">
+            <input id="lang3" required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="en" hidden>
+            <div class="mb-3">
+              <label for="formGroupExampleInput" class="form-label">{{_('PayPay API Key')}}</label>
+              <div class="input-group mb-3">
+                  <input required name="paypay_api_key" id="paypay_api_key" class="form-control" type="password" placeholder="{{_('Please enter the correct Paypay API Key')}}"  value="{{paypayConfig.paypayAPIKey}}" aria-describedby="button-addon2"/>
+                  <button class="btn btn-secondary" type="button" id="button-addon2"id="preview-ppc-token" onclick="displayHiddenValue('paypay_api_key')">{{_('Display')}}</button>
+                </div>
+            <div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">{{_('PayPay APIシークレット')}}</label>
+                <div class="input-group mb-3">
+                  <input required name="paypay_api_secret" id="paypay_api_secret" class="form-control" type="password" placeholder="{{_('正しい PayPayのAPIシークレット を入力してください')}}"  value="{{paypayConfig.paypayAPISecret}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="button-addon2"id="preview-ppc-token" onclick="displayHiddenValue('paypay_api_secret')">{{_('Display')}}</button>
+                </div>
+            <div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">{{_('PayPay マーチャントの識別子(merchantID)')}}</label>
+                <div class="input-group mb-3">
+                    <input required name="paypay_merchant_id" id="paypay_merchant_id" class="form-control" type="password" placeholder="{{_('正しい PayPayのマーチャントID を入力してください')}}"  value="{{paypayConfig.paypayMerchantId}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="button-addon2"id="preview-ppc-token" onclick="displayHiddenValue('paypay_merchant_id')">{{_('Display')}}</button>
+                </div>
+            <div>
+            <div class="d-flex  mt-4 ">
+              <button class="btn btn-primary">
+                {{_('Update PayPay Connection Settings')}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if selected_provider == 'sb' %}
+  <section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <hr style="border: 0.5px solid white;">
+          <h2 class="custom_heading">{{_('SB Payment Integration Settings')}}</h2>
+          <form action="/update-sb-settings" method="post">
+            <input id="lang3" required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="en" hidden>
+            <div class="mb-3">
+              <label for="formGroupExampleInput" class="form-label"><strong>{{_('Merchant ID')}}</strong></label>
+              <div class="input-group mb-3">
+                  <input required name="sb_merchant_id" id="sb_merchant_id" class="form-control" type="password" placeholder="{{_('正しい SB PaymentのショップID を入力してください')}}"  value="{{sb_config.sbMerchantId}}" aria-describedby="button-addon2"/>
+                  <button class="btn btn-secondary" type="button" id="preview-sb-merchant-id" onclick="displayHiddenValue('sb_merchant_id')">{{_('表示')}}</button>
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label"><strong>{{_('Service ID')}}</strong></label>
+                <div class="input-group mb-3">
+                    <input required name="sb_service_id" id="sb_service_id" class="form-control" type="password" placeholder="{{_('正しい SB Paymentのショップパスワード を入力してください')}}"  value="{{sb_config.sbServiceId}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="preview-gmo-shop-password" onclick="displayHiddenValue('sb_service_id')">{{_('表示')}}</button>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label"><strong>{{_('SB Payment Hash Key')}}</strong></label>
+                <div class="input-group mb-3">
+                    <input required name="sb_hash_key_link" id="sb_hash_key_link" class="form-control" type="password" placeholder="{{_('正しい SB Paymentのショップパスワード を入力してください')}}"  value="{{sb_config.sbHashKeyLink}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="preview-sb-hash_key_link" onclick="displayHiddenValue('sb_hash_key_link')">{{_('表示')}}</button>
+                </div>
+              </div>
+            
+            <div class="d-flex  mt-4 ">
+              <button class="btn btn-primary">
+                {{_('Apply Changes to SB Payment')}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if selected_provider == 'gmo' %}
+  <section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <hr style="border: 0.5px solid white;">
+          <h2 class="custom_heading">{{_('GMO Integration Settings')}}</h2>
+          <form action="/update-gmo-settings" method="post">
+            <input id="lang3" required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="en" hidden>
+            <div class="mb-3">
+              <label for="formGroupExampleInput" class="form-label"><strong>{{_('GMO Shop ID')}}</strong></label>
+              <div class="input-group mb-3">
+                  <input required name="gmo_shop_id" id="gmo_shop_id" class="form-control" type="password" placeholder="{{_('正しい GMOのショップID を入力してください')}}"  value="{{gmo_config.gmoShopId}}" aria-describedby="button-addon2"/>
+                  <button class="btn btn-secondary" type="button" id="preview-gmo-shop-id" onclick="displayHiddenValue('gmo_shop_id')">{{_('表示')}}</button>
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label"><strong>{{_('GMO Shop Password')}}</strong></label>
+                <div class="input-group mb-3">
+                    <input required name="gmo_shop_password" id="gmo_shop_password" class="form-control" type="password" placeholder="{{_('正しい GMOのショップパスワード を入力してください')}}"  value="{{gmo_config.gmoShopPassword}}" aria-describedby="button-addon2"/>
+                    <button class="btn btn-secondary" type="button" id="preview-gmo-shop-password" onclick="displayHiddenValue('gmo_shop_password')">{{_('表示')}}</button>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label"><strong>{{_('GMO Payment Method')}}</strong></label><br>
+                <label for="formGroupExampleInput" class="form-label">{{_('Card Payment')}}</label>
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.creditCardEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="creditCardEnabled" id="creditCardEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="creditCardEnabled" id="creditCardEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="creditCardEnabled">
+                        {{_('Credit Card')}}
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.applePayEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="applePayEnabled" id="applePayEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="applePayEnabled" id="applePayEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="applePayEnabled">
+                        {{_('Apple Pay')}}
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.googlePayEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="googlePayEnabled" id="googlePayEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="googlePayEnabled" id="googlePayEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="googlePayEnabled">
+                        {{_('Google Pay')}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <label for="formGroupExampleInput" class="form-label">{{_('電子ウオレット決済')}}</label>
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.paypayEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="paypayEnabled" id="paypayEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="paypayEnabled" id="paypayEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="gmoEnabled">
+                        {{_('PayPay')}}
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.auPayEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="auPayEnabled" id="auPayEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="auPayEnabled" id="auPayEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="auPayEnabled">
+                        {{_('Au Pay')}}
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.rakutenPayEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="rakutenPayEnabled" id="rakutenPayEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="rakutenPayEnabled" id="rakutenPayEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="rakutenPayEnabled">
+                        {{_('楽天ペイ (Rakuten Pay)')}}
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.docomoPayEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="docomoPayEnabled" id="docomoPayEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="docomoPayEnabled" id="docomoPayEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="docomoPayEnabled">
+                        {{_('d払い (dPay)')}}
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      {% if gmo_config.meruPayEnabled == "Y" %}
+                      <input class="form-check-input" type="checkbox" name="meruPayEnabled" id="meruPayEnabled" checked>
+                      {% else %}
+                      <input class="form-check-input" type="checkbox" name="meruPayEnabled" id="meruPayEnabled">
+                      {% endif %}
+                      <label class="form-check-label" for="meruPayEnabled">
+                        {{_('メルペイ(MerPay)')}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+            <div>
+            <div class="d-flex  mt-4 ">
+              <button class="btn btn-primary">
+                {{_('GMO接続設定を更新する')}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if papercutConfig.paperCutServer != '' %}
+  <section class="contact_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mt-3 mb-3">
+          <hr style="border: 0.5px solid white;">
+          <h2 class="custom_heading">
+            {{_('Point Charge Transaction Settings')}}
+            <a href='/transaction-logs'>
+                  <button type="button" class="btn btn-dark ml-1">{{_('Transaction Logs')}}</button>
+            </a>
+          </h2>
+            <label for="basic-url">{{_('List of charge amount selection that will be displayed on the user screen.')}}</strong></a></label>
+            <input id="lang5" required name="lang" type="text" class="form-control" id="formGroupExampleInput"  value="jp" hidden>
+            <div class="d-flex">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPriceModal">
+                {{_('Add new pricing')}}
+              </button>
+            </div>
+          <br>
+          <div class="ml-3 mr-3">
+            <table class="table table-small table-light table-bordered table-hover">
+              <caption class="text-white">{{paymentConfig.messagejp}}</caption>
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">{{_('Price (￥)')}}</th>
+                  <th scope="col">{{_('Points')}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in paymentConfig.data %}
+                <tr>
+                  <th scope="row">
+                    {{data.index}} ・                    
+                    <button type="button" class="btn btn-sm btn-warning open-EditPrice" data-toggle="modal" data-target="#newPriceModal" data-price="{{data.price}}" data-points="{{data.points}}" data-id="{{data.id}}">
+                        <img class="img-responsive" style="height: 20px;" src="{{ url_for('static',filename='images/edit-icon.png') }}" alt="" />
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger open-DeletePrice" data-toggle="modal" data-target="#deletePriceModal" data-price="{{data.price}}" data-points="{{data.points}}" data-id="{{data.id}}">
+                        <img class="img-responsive" style="height: 20px;" src="{{ url_for('static',filename='images/delete-icon.png') }}" alt="" />
+                    </button>
+                  </th>
+                  <td>￥{{data.price}}</td>
+                  <td>{{data.points}} {{_('Points')}}</td>
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+
+<!-- Pricing Modal -->
+<div class="modal fade" id="newPriceModal" tabindex="-1" aria-labelledby="newPriceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newPriceModalLabel">{{_('Add New Pricing Modal')}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="pricing_form" action="/add-new-price" method="post">
+      <div class="modal-body">
+        <input hidden type="number" id="price_id" name="price_id" class="form-control" id="formGroupExampleInput" >
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="formGroupExampleInput">{{_('Price (￥)')}}</label>
+                <input type="number" id="new_price" name="new_price" class="form-control" id="formGroupExampleInput" placeholder="100" min="100" max="10000" step="1">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="formGroupExampleInput">{{_('Points')}}</label>
+                <input type="number" id="new_points" name="new_points" class="form-control" id="formGroupExampleInput" placeholder="100" min="100" max="10000" step="1">
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_('Close')}}</button>
+        <button id="new-price-button" type="submit" class="btn btn-primary">{{_('Save')}}</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Price Modal -->
+<div class="modal fade" id="deletePriceModal" tabindex="-1" aria-labelledby="deletePriceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePriceModalLabel">{{_('Delete Price')}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="delete_price_form" action="/delete-price" method="post">
+      <div class="modal-body">
+        <input hidden type="number" id="selected_price_id" name="selected_price_id" class="form-control" id="formGroupExampleInput" >
+        <label for="formGroupExampleInput">{{_('Are you sure to delete the selected price?')}}</label>
+        <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="formGroupExampleInput">{{_('Price (￥)')}}</label>
+                <input readonly type="number" id="selected_price" name="selected_price" class="form-control" id="formGroupExampleInput" placeholder="100" min="100" max="10000" step="1">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="formGroupExampleInput">{{_('Points')}}</label>
+                <input readonly type="number" id="selected_points" name="selected_points" class="form-control" id="formGroupExampleInput" placeholder="100" min="100" max="10000" step="1">
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_('Close')}}</button>
+        <button id="delete-price-button" type="submit" class="btn btn-primary">{{_('Delete')}}</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <footer class="container-fluid footer_section">
+    <p>
+      &copy;<script>document.write(new Date().getFullYear())</script>
+       {{_('All Rights Reserved By')}}
+      <a href="https://cosy.co.jp" target="_blank">株式会社COSY</a>
+    </p>
+  </footer>
+  <script src="{{ url_for('static',filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/circles.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/custom.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/settingpage/settingpage.js') }}"></script>
+
+</body>
+
+</html>
