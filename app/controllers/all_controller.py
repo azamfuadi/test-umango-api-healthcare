@@ -44,6 +44,12 @@ def send_mail(subject, recipient, template, **kwargs):
     thr.start()
     return thr
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'pdf'])
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
     
 def jwt_or_redirect(fn):
     @wraps(fn)

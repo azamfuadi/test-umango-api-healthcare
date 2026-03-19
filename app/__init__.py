@@ -56,10 +56,12 @@ db_session = flask_scoped_session(sessionmaker(bind=engine))
 from app.routers.all_router import *
 from app.routers.user_router import *
 from app.routers.syokaijou_router import *
+from app.routers.monshinhyou_router import *
 
 app.register_blueprint(allroute_blueprint)
 app.register_blueprint(users_blueprint)
 app.register_blueprint(syokaijou_blueprint)
+app.register_blueprint(monshinhyou_blueprint)
 
 @app.context_processor
 def inject_languages():

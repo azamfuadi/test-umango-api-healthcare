@@ -4,6 +4,7 @@ import datetime
 import uuid
 from sqlalchemy import desc
 import flask_excel as excel
+from flask import jsonify
 
 from app.models.syokaijou_model import tokyo, syokaijou
 from app.controllers.all_controller import session_scope
@@ -23,11 +24,13 @@ def checkSyokaijouById(syokaijouId):
         'file_location': selected_syokaijou.file_location,
     }
     
-    response = {
+    result = {
                 'message': gettext('Success loading the letter of introduction.'),
                 'code': '01',
                 'data': data
     }
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 # Downloading the transaction log as CSV file
@@ -58,11 +61,13 @@ def getSyokaijouList():
                     'summary': items.summary,
                     'file_location': items.file_location,
         }) 
-    response = {
+    result = {
                 'message': gettext('Success loading the letter of introduction list.'),
                 'code': '01',
                 'data': result
     }
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 def addNewSyokaijou(username, date, disease_name, introduction_purpose, summary, file_location):
@@ -83,20 +88,22 @@ def addNewSyokaijou(username, date, disease_name, introduction_purpose, summary,
                 file_location = file_location
             )
             session.add(new_syokaijou)
-    response = {
-                'message': gettext('Success adding a new letter of introduction list.'),
-                'code': '01',
-                'data': {
-                    'id': syoukaijou_id,
-                    'created_at': string_timestamp,
-                    'updated_at': string_timestamp,
-                    'username': username,
-                    'date': date,
-                    'disease_name': disease_name,
-                    'introduction_purpose': introduction_purpose,
-                    'summary': summary,
-                    'file_location': file_location,
+    result = {
+                "message": gettext('Success adding a new letter of introduction list.'),
+                "code": "01",
+                "data": {
+                    "id": syoukaijou_id,
+                    "created_at": string_timestamp,
+                    "updated_at": string_timestamp,
+                    "username": username,
+                    "date": date,
+                    "disease_name": disease_name,
+                    "introduction_purpose": introduction_purpose,
+                    "summary": summary,
+                    "file_location": file_location,
         }
     }
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
         

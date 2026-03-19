@@ -38,13 +38,10 @@
                 {{_('Letter of Introduction')}}
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="{{ url_for('set_language', lang=code) }}" class="dropdown-item active">
+                    <a href="{{ url_for('introductionLetterPage') }}" class="dropdown-item active">
                       {{_('Letter of Introduction')}} 
                     </a>
-                    <a href="{{ url_for('set_language', lang=code) }}" class="dropdown-item">
-                      {{_('Detailed Letter of Introduction')}}
-                    </a>
-                    <a href="{{ url_for('set_language', lang=code) }}" class="dropdown-item">
+                    <a href="{{ url_for('medicalQuestionnairePage') }}" class="dropdown-item">
                       {{_('Internal Medicine Medical Questionnaire')}} 
                     </a>
               </div>
@@ -126,7 +123,7 @@
   <script src="{{ url_for('static',filename='js/datatables.min.js') }}"></script>
   <script>
     $('#example').DataTable( {
-      order: [[0, 'desc']]
+      order: [[0, 'asc']]
     });
   </script>
 
