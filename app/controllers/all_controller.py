@@ -44,7 +44,7 @@ def send_mail(subject, recipient, template, **kwargs):
     thr.start()
     return thr
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'pdf'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'pdf', 'tfif'])
 
 
 def allowed_file(filename):

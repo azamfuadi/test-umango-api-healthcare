@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 from app.models.monshinhyou_model import tokyo, monshinhyou
 from app.controllers.all_controller import session_scope, allowed_file
 import os
+import base64
 
 #Obtaining the Syoukaijou details
 def checkMonshinhyouById(monshinhyouId):
@@ -89,26 +90,47 @@ def getMonshinhyouList():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-def addNewMonshinhyou(file, username, date, patient_name, gender, birthday, symptoms, current_illness, medication, food_allergies, drug_allergies, medical_history, drinking_habits, smoking_habits, file_location):
+def addNewMonshinhyou(file_encryption, file, filename, username, date, patient_name, gender, birthday, symptoms, current_illness, medication, food_allergies, drug_allergies, medical_history, drinking_habits, smoking_habits, file_location):
     timestamp = tokyo.localize(datetime.datetime.now())
     string_timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
     specific_string_timestamp = str(timestamp.timestamp()).replace('.','_')
     monshinhyou_id = uuid.uuid4().hex[:5]+'_'+specific_string_timestamp
 
+    print(filename)
+    print(file)
     file_url = ''
-    print(file.filename)
-    if file != '' and allowed_file(file.filename):
-        print(file.filename)
-        filename = file.filename
-        if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
-            print("The file has been deleted successfully")
-            file_url = specific_string_timestamp+"_"+filename
-        else:
-            file_url = filename
-            print("The file does not exist!")
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_url))
-    else: 
-        print("Unsupported file")
+    if file_encryption == 'base64':
+        if file != '' and filename != '':
+            file_data = base64.b64decode(file)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+            if os.path.exists(file_path):
+                print("The file has been deleted successfully")
+                file_url = specific_string_timestamp+"_"+filename
+            else:
+                file_url = filename
+                print("The file does not exist!")
+        
+            with open(os.path.join(app.config['UPLOAD_FOLDER'], file_url), 'wb') as f:
+                f.write(file_data)
+        else: 
+            print("No file uploaded")
+    else:
+        if file != '' and allowed_file(file.filename):
+            print(file.filename)
+            filename = file.filename
+            if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
+                print("The file has been deleted successfully")
+                file_url = specific_string_timestamp+"_"+filename
+            else:
+                file_url = filename
+                print("The file does not exist!")
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_url))
+        else: 
+            print("Unsupported file")
+
+
+
         
     with session_scope() as session:
             new_monshinhyou = monshinhyou(

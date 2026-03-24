@@ -41,13 +41,24 @@ def addMedicalQuestionnaire():
         drinking_habits =  request.form["drinking_habits"]
         smoking_habits =  request.form["smoking_habits"]
         file_location = request.form["file_location"]
+        file_encryption = request.form["file_encryption"]
 
-        if 'pdf_file' not in request.files:
-            file = ''
+        if(file_encryption):
+            file = request.form["pdf_file"]
+            filename = request.form["filename"]
         else:
             file = request.files['pdf_file']
+            filename = request.files['filename']    
         
-        return monshinhyou_controller.addNewMonshinhyou(file, username, date, patient_name, gender, birthday, symptoms, current_illness, medication, food_allergies, drug_allergies, medical_history, drinking_habits, smoking_habits, file_location)
+
+        # if 'pdf_file' not in request.files:
+        #     file = ''
+        #     filename = ''
+        # else:
+        #     file = request.files['pdf_file']
+        #     filename = request.files['filename']
+        
+        return monshinhyou_controller.addNewMonshinhyou(file_encryption, file, filename, username, date, patient_name, gender, birthday, symptoms, current_illness, medication, food_allergies, drug_allergies, medical_history, drinking_habits, smoking_habits, file_location)
     
 @app.route("/api/get-all/medical-questionnaire")
 def getAllMedicalQuestionnaire():
