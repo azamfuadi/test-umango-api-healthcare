@@ -50,14 +50,6 @@ def addMedicalQuestionnaire():
             file = request.files['pdf_file']
             filename = request.files['filename']    
         
-
-        # if 'pdf_file' not in request.files:
-        #     file = ''
-        #     filename = ''
-        # else:
-        #     file = request.files['pdf_file']
-        #     filename = request.files['filename']
-        
         return monshinhyou_controller.addNewMonshinhyou(file_encryption, file, filename, username, date, patient_name, gender, birthday, symptoms, current_illness, medication, food_allergies, drug_allergies, medical_history, drinking_habits, smoking_habits, file_location)
     
 @app.route("/api/get-all/medical-questionnaire")

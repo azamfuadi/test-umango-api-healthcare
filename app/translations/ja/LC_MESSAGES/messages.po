@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-14 15:57+0900\n"
+"POT-Creation-Date: 2026-03-25 10:59+0900\n"
 "PO-Revision-Date: 2025-10-16 11:51+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,833 +18,161 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/controllers/all_controller.py:357
-msgid "Logged Out"
-msgstr "ログアウトされました"
+#: app/controllers/all_controller.py:75
+msgid "Authentication token is missing. Please login again."
+msgstr "認証トークンがありません。再度ログインしてください。"
 
-#: app/controllers/all_controller.py:357
-msgid "Logout"
-msgstr "ログアウト"
-
-#: app/controllers/all_controller.py:135
-msgid "Success updating selected provider"
-msgstr "選択されたプロバイダーの更新に成功しました"
-
-#: app/controllers/all_controller.py:213
-msgid "Success updating PaperCut Default Configuration"
-msgstr "PaperCut既定設定の更新に成功しました"
-
-#: app/controllers/all_controller.py:246 app/controllers/all_controller.py:279
-msgid "Authentication token is missing."
-msgstr "認証トークンがありません。"
-
-#: app/controllers/all_controller.py:252 app/controllers/all_controller.py:285
+#: app/controllers/all_controller.py:81
 msgid "Token is expired, please reauthenticate."
-msgstr "トークンが期限切れです。再認証してください。"
+msgstr "トークンの有効期限が切れています。再度ログインしてください。"
 
-#: app/controllers/all_controller.py:256 app/controllers/all_controller.py:289
+#: app/controllers/all_controller.py:85
 msgid "Token is invalid, please reauthenticate."
-msgstr "トークンが無効です。再認証してください。"
-
-#: app/controllers/all_controller.py:335
-msgid ""
-"Cannot connect to PaperCut Primary Server. Please check the configuration"
-" file."
-msgstr "PaperCutプライマリサーバーに接続できません。設定ファイルを確認してください。"
-
-#: app/controllers/all_controller.py:358
-msgid "Login success"
-msgstr "ログイン成功"
-
-#: app/controllers/all_controller.py:365
-msgid "Wrong Password"
-msgstr "パスワードが違います"
-
-#: app/controllers/all_controller.py:371
-msgid "Wrong Username"
-msgstr "ユーザー名が違います"
-
-#: app/controllers/all_controller.py:399 app/routers/web_router.py:95
-#: app/routers/web_router.py:159 app/routers/web_router.py:381
-msgid ""
-"Cannot connect to PaperCut Primary Server. Please contact your "
-"administrator."
-msgstr "PaperCutプライマリサーバーに接続できません。管理者にお問い合わせください。"
-
-#: app/controllers/all_controller.py:415
-msgid ""
-"User is not registered in PaperCut. Please contact your administrator, or"
-" access the top-up page from the PaperCut Portal."
-msgstr "ユーザーはPaperCutに登録されていません。管理者にお問い合わせいただくか、PaperCutポータルからチャージページにアクセスしてください。"
-
-#: app/controllers/paypay_controller.py:59
-msgid "Success updating PayPay integration settings"
-msgstr "PayPay連携設定の更新に成功しました"
-
-# controllers/all_controller translation end
-# controllers/paypay_controller translation start
-#: app/controllers/paypay_controller.py:91
-msgid "Top up amount should be more than or equal with the Minimum Purchase ("
-msgstr "チャージ額は最低購入額（"
-
-#: app/controllers/paypay_controller.py:94
-msgid "Top up amount should be less than or equal with the Maximum Purchase ("
-msgstr "チャージ額は最大購入額（"
-
-#: app/controllers/paypay_controller.py:234
-#: app/controllers/sb_controller.py:198
-msgid ""
-"User is not registered in PaperCut. Please contact your administrator, or"
-" access the top-up page from PaperCut Portal."
-msgstr "ユーザーはPaperCutに登録されていません。管理者にお問い合わせいただくか、PaperCutポータルからチャージページにアクセスしてください。"
-
-#: app/controllers/paypay_controller.py:237
-#: app/controllers/paypay_controller.py:292
-#: app/controllers/sb_controller.py:201 app/controllers/sb_controller.py:245
-#: app/controllers/sb_controller.py:292
-msgid ""
-"The top up amount is not registered in the settings. Please contact your "
-"administrator."
-msgstr "このチャージ額は設定に登録されていません。管理者にお問い合わせください。"
-
-#: app/controllers/paypay_controller.py:262
-msgid "API issue, cannot find the transaction in PayPay server."
-msgstr "APIの問題により、PayPayサーバーで取引が見つかりません。"
-
-#: app/controllers/paypay_controller.py:286
-#: app/controllers/sb_controller.py:233
-msgid "Papercut Points Purchase Success Notification"
-msgstr "PaperCutポイント購入成功通知"
-
-#: app/controllers/paypay_controller.py:297
-msgid "Cannot find the transaction with this merch ID"
-msgstr "このマーチャントIDを持つ取引が見つかりません"
-
-#: app/controllers/paypay_controller.py:300
-#: app/controllers/sb_controller.py:253
-msgid ""
-"This transaction has already been completed, please check the log on "
-"PaperCut."
-msgstr "この取引はすでに完了しています。PaperCutのログを確認してください。"
-
-#: app/controllers/paypay_controller.py:305
-#: app/controllers/sb_controller.py:263
-msgid "Cancelled. Please close this tab/window and return to PaperCut"
-msgstr "キャンセルされました。このタブ/ウィンドウを閉じてPaperCutに戻ってください"
-
-#: app/controllers/paypay_controller.py:307
-#: app/controllers/sb_controller.py:265
-msgid ""
-"API issue, incomplete transaction. Point charge has been cancelled. The "
-"screen will change to Papercut user interface after 5 seconds"
-msgstr "APIの問題により、取引が不完全です。ポイントチャージはキャンセルされました。5秒後にPaperCutユーザーインターフェースに画面が切り替わります。"
-
-#: app/controllers/sb_controller.py:29
-msgid "Error accessing the URL"
-msgstr "URLへのアクセスエラー"
-
-#: app/controllers/sb_controller.py:119
-msgid "Success updating SB Payment integration settings"
-msgstr "SB-Payment連携設定の更新に成功しました"
-
-#: app/controllers/sb_controller.py:241 app/controllers/sb_controller.py:248
-#: app/controllers/sb_controller.py:256 app/controllers/sb_controller.py:268
-msgid "Papercut Points Purchase Failed Notification"
-msgstr "PaperCutポイント購入成功通知"
-
-#: app/controllers/transaction_controller.py:42
-msgid ""
-"Cannot find the price configuration file. Using the template file, please"
-" upload a new csv file containing the configuration."
-msgstr "価格設定ファイルが見つかりません。テンプレートファイルを使用して、設定を含む新しいCSVファイルをアップロードしてください。"
-
-#: app/controllers/transaction_controller.py:59
-#: app/controllers/transaction_controller.py:149
-msgid "Success loading the price configuration file."
-msgstr "価格設定ファイルの読み込みに成功しました。"
-
-#: app/controllers/transaction_controller.py:79
-msgid ""
-"The file name is not as expected, please set the file name to "
-"point_price.csv"
-msgstr "ファイル名が想定と異なります。ファイル名を point_price.csv に設定してください。"
-
-#: app/controllers/transaction_controller.py:103
-msgid "Please provide only integer values without any spaces."
-msgstr "スペースを入れずに整数値のみを入力してください。"
-
-#: app/controllers/transaction_controller.py:120
-#: app/controllers/transaction_controller.py:177
-#: app/controllers/transaction_controller.py:198
-msgid "Success updating PaperCut Points Pricing"
-msgstr "PaperCut支払い設定の更新に成功しました"
-
-#: app/controllers/transaction_controller.py:127
-msgid ""
-"Failed updating PaperCut Points Pricing. Please check your uploaded file "
-"type."
-msgstr "PaperCut支払い設定の更新に失敗しました。アップロードされたファイルの種類を確認してください。"
-
-#: app/controllers/transaction_controller.py:210
-msgid "Success deleting PaperCut Points Pricing"
-msgstr "PaperCut支払い設定の更新に成功しました"
-
-#: app/controllers/transaction_controller.py:301
-msgid "Success loading the transaction logs."
-msgstr "価格設定ファイルの読み込みに成功しました。"
-
-#: app/routers/sb_router.py:24
-msgid "There are error in SB Payment parameters. Changes are not saved."
-msgstr "SB Paymentパラメータにエラーがあります。変更は保存されません。"
-
-#: app/routers/web_router.py:48 app/routers/web_router.py:50
-msgid "PaperCut Server connection is not configured yet"
-msgstr "PaperCutサーバ接続はまだ設定されていません"
-
-#: app/routers/web_router.py:70 app/routers/web_router.py:182
-msgid "Cannot connect to PaperCut Primary Server"
-msgstr "PaperCutプライマリサーバーに接続できません。"
-
-# controllers/paypay_controller translation end
-# routers/web_router translation start
-#: app/routers/web_router.py:108
-msgid ""
-"Cannot find the price configuration file, please upload a new csv file "
-"containing the configuration."
-msgstr "価格設定ファイルが見つかりません。設定を含む新しいCSVファイルをアップロードしてください。"
-
-#: app/routers/web_router.py:139 app/routers/web_router.py:169
-msgid "Only PaperCut administrator can access the settings page."
-msgstr ""
-
-#: app/routers/web_router.py:185
-msgid "Cannot connect to PaperCut Primary Server. Changes are not saved."
-msgstr "PaperCutプライマリサーバーに接続できません。変更は保存されませんでした。"
-
-#: app/routers/web_router.py:194
-msgid ""
-"Connected to PaperCut Primary Server, but wrong Auth Token. Changes are "
-"not saved"
-msgstr "PaperCutプライマリサーバーに接続しましたが、認証トークンが間違っています。変更は保存されません。"
-
-#: app/routers/web_router.py:211 app/routers/web_router.py:282
-msgid "An error occured. Please check your connection."
-msgstr "エラーが発生しました。接続を確認してください。"
-
-#: app/routers/web_router.py:225
-msgid "An error occured. Cannot obtain any transaction."
-msgstr ""
-
-#: app/routers/web_router.py:267
-msgid ""
-"Unable to create PayPay Client connection. Incorrect PayPay credentials. "
-"Changes are not saved."
-msgstr "PayPayクライアント接続を作成できません。PayPayの認証情報が間違っています。変更は保存されませんでした。"
-
-# templates/alert/success translation end
-# templates/settings/login translation start
-#: app/templates/alert/error.html:53 app/templates/alert/success.html:50
-#: app/templates/logs/transaction_log.html:49
-#: app/templates/settings/login.html:50 app/templates/settings/setting.html:48
-#: app/templates/topup/client_topup.html:55
-msgid "Back to PaperCut"
-msgstr "PaperCutに戻る"
-
-# routers/web_router translation end
-# templates/alert/success translation end
-#: app/templates/alert/success.html:60
-msgid "Payment Success!"
-msgstr "支払い成功！"
-
-#: app/templates/alert/success.html:62
-msgid "Points has been added to your PaperCut Account."
-msgstr "PaperCutアカウントにポイントが追加されました。"
-
-#: app/templates/alert/success.html:69
-msgid "Transaction Summary"
-msgstr "取引概要"
-
-#: app/templates/alert/success.html:74
-msgid "Payment Amount"
-msgstr "支払い金額"
-
-#: app/templates/alert/success.html:78
-msgid "Points Balance Before Charging"
-msgstr "チャージ前のポイント残高"
-
-#: app/templates/alert/success.html:82
-msgid "Charge Points"
-msgstr "チャージポイント"
-
-#: app/templates/alert/success.html:86
-msgid "Points Balance After Charging"
-msgstr "チャージ後のポイント残高"
-
-# templates/settings/login translation end
-# templates/settings translation start
-#: app/templates/logs/transaction_log.html:12
-msgid "Payment System Transaction Logs"
-msgstr "決済システムの取引ログ"
-
-# templates/settings/login translation end
-# templates/settings translation start
-#: app/templates/logs/transaction_log.html:32
-#: app/templates/settings/setting.html:12
-#: app/templates/settings/setting.html:31
-msgid "Payment System Configuration"
-msgstr "決済システム設定"
-
-#: app/templates/logs/transaction_log.html:52
-msgid "Back to Settings Page"
-msgstr "設定ページへ戻る"
-
-#: app/templates/logs/transaction_log.html:66
-msgid "Transaction Logs Table"
-msgstr "取引ログの表"
-
-#: app/templates/logs/transaction_log.html:69
-msgid "Download Transaction Logs"
-msgstr "取引ログをダウンロード"
-
-#: app/templates/logs/transaction_log.html:75
-msgid "Last Update"
-msgstr "更新日時"
-
-#: app/templates/logs/transaction_log.html:76
-msgid "Created At"
-msgstr "作成日時"
-
-#: app/templates/logs/transaction_log.html:77
-msgid "Expired At"
-msgstr "有効期限"
-
-#: app/templates/logs/transaction_log.html:78
-msgid "ID"
-msgstr "ID"
-
-#: app/templates/logs/transaction_log.html:79
-msgid "Status"
-msgstr "ステータス"
-
-#: app/templates/logs/transaction_log.html:80
-msgid "Account"
-msgstr "アカウント"
-
-#: app/templates/logs/transaction_log.html:81
-#: app/templates/mail/payment_succeed.html:272
-#: app/templates/settings/setting.html:441
-#: app/templates/settings/setting.html:457
-#: app/templates/settings/setting.html:492
-#: app/templates/settings/setting.html:530
-#: app/templates/topup/client_topup.html:112
-msgid "Points"
-msgstr "ポイント"
-
-#: app/templates/logs/transaction_log.html:82
-msgid "Price"
-msgstr "価格 (￥)"
-
-#: app/templates/logs/transaction_log.html:83
-msgid "Payment Method"
-msgstr "支払い方法"
-
-#: app/templates/logs/transaction_log.html:116
-#: app/templates/settings/setting.html:552
-#: app/templates/topup/client_topup.html:171
-msgid "Location"
-msgstr "所在地"
-
-#: app/templates/logs/transaction_log.html:121
-#: app/templates/settings/setting.html:557
-msgid "104 loram ipusm"
-msgstr "104 loram ipusm"
-
-#: app/templates/logs/transaction_log.html:127
-#: app/templates/settings/setting.html:563
-msgid "( +01 1234567890 )"
-msgstr "( +01 1234567890 )"
-
-#: app/templates/logs/transaction_log.html:133
-#: app/templates/settings/setting.html:569
-msgid "demo@gmail.com"
-msgstr "demo@gmail.com"
-
-#: app/templates/logs/transaction_log.html:144
-#: app/templates/settings/setting.html:580
+msgstr "トークンが無効です。再度ログインしてください。"
+
+#: app/controllers/monshinhyou_controller.py:39
+msgid "Success loading the medical questionnaire."
+msgstr "医療問診票の読み込みに成功しました。"
+
+#: app/controllers/monshinhyou_controller.py:55
+#: app/templates/table/monshinhyou.html:76
+msgid "Medical Questionnaire List"
+msgstr "医療問診票の一覧"
+
+#: app/controllers/monshinhyou_controller.py:85
+msgid "Success loading the medical questionnaire list."
+msgstr "医療問診票の一覧の読み込みに成功しました。"
+
+#: app/controllers/monshinhyou_controller.py:159
+#: app/controllers/syokaijou_controller.py:92
+msgid "Success adding a new letter of introduction."
+msgstr "新しい紹介状の追加に成功しました。"
+
+#: app/controllers/syokaijou_controller.py:28
+msgid "Success loading the letter of introduction."
+msgstr "紹介状の読み込みに成功しました。"
+
+#: app/controllers/syokaijou_controller.py:44
+#: app/templates/table/syokaijou.html:76
+msgid "Letter of Introduction List"
+msgstr "紹介状の一覧"
+
+#: app/controllers/syokaijou_controller.py:65
+msgid "Success loading the letter of introduction list."
+msgstr "紹介状の一覧の読み込みに成功しました。"
+
+#: app/templates/index.html:8 app/templates/index.html:29
+#: app/templates/index.html:49 app/templates/table/monshinhyou.html:32
+#: app/templates/table/syokaijou.html:32
+msgid "Umango Medical Related Document Demo"
+msgstr "Umango医療関連文書デモ"
+
+#: app/templates/index.html:55 app/templates/index.html:59
+#: app/templates/table/monshinhyou.html:48
+#: app/templates/table/syokaijou.html:48
+msgid "Home"
+msgstr "ホーム"
+
+#: app/templates/index.html:62 app/templates/table/monshinhyou.html:12
+#: app/templates/table/monshinhyou.html:38
+#: app/templates/table/monshinhyou.html:42
+#: app/templates/table/syokaijou.html:45
+msgid "Medical Questionnaire"
+msgstr "医療問診票"
+
+#: app/templates/index.html:65 app/templates/table/monshinhyou.html:45
+#: app/templates/table/syokaijou.html:12 app/templates/table/syokaijou.html:38
+#: app/templates/table/syokaijou.html:42
+msgid "Letter of Introduction"
+msgstr "紹介状"
+
+#: app/templates/index.html:107 app/templates/table/monshinhyou.html:154
+#: app/templates/table/syokaijou.html:117
 msgid "2014 All Rights Reserved By"
 msgstr "2014 All Rights Reserved By"
 
-#: app/templates/mail/admin_notification.html:312
-msgid "An Error Occured during Point Charging"
-msgstr "ポイントチャージ中にエラーが発生しました"
+#: app/templates/table/monshinhyou.html:79
+#: app/templates/table/syokaijou.html:79
+msgid "Export List"
+msgstr "一覧をエクスポート"
 
-#: app/templates/mail/admin_notification.html:363
-msgid "There is a problem with the transaction below"
-msgstr "以下の取引に問題があります"
-
-#: app/templates/mail/admin_notification.html:367
-msgid "PaperCut Username: "
-msgstr "PaperCutユーザ名:"
-
-#: app/templates/mail/admin_notification.html:368
-msgid "Purchased Points: "
-msgstr "購入ポイント:"
-
-#: app/templates/mail/admin_notification.html:369
-msgid "Purchase Price: "
-msgstr "購入金額:"
-
-#: app/templates/mail/admin_notification.html:370
-msgid "Transaction ID: "
-msgstr "取引ID:"
-
-#: app/templates/mail/admin_notification.html:371
-msgid "Payment Method: "
-msgstr "支払い方法"
-
-#: app/templates/mail/admin_notification.html:378
-msgid "Click on the button below to check all of the transactions log"
-msgstr "すべての取引ログを確認するには、下のボタンをクリックしてください。"
-
-#: app/templates/mail/admin_notification.html:397
-msgid "Go to transactions log"
-msgstr "取引ログページに移動"
-
-#: app/templates/mail/admin_notification.html:424
-msgid ""
-"If\n"
-""
-"                                                                                "
-"the button is not working, please click\n"
-""
-"                                                                                "
-"or copy and paste this link on your\n"
-""
-"                                                                                "
-"browser"
-msgstr ""
-
-#: app/templates/mail/payment_succeed.html:204
-msgid "Thank You for Paying your Purchase Transaction ! Here is the receipt"
-msgstr "お買い上げいただきありがとうございます。領収書はこちらです。"
-
-#: app/templates/mail/payment_succeed.html:223
-msgid "Thank You for Your Purchase!"
-msgstr "ご購入いただきありがとうございます！"
-
-#: app/templates/mail/payment_succeed.html:237
-msgid "Your purchase for papercut points is successful using"
-msgstr "PaperCutポイントのご購入は、%sを利用して完了しました。"
-
-#: app/templates/mail/payment_succeed.html:253
-msgid "Order Confirmation #"
-msgstr "注文確認番号"
-
-#: app/templates/mail/payment_succeed.html:264
-#, 
-msgid "Purchase Amount"
-msgstr "購入金額"
-
-#: app/templates/mail/payment_succeed.html:265
-msgid "Conversion"
-msgstr "換算"
-
-#: app/templates/mail/payment_succeed.html:266
-#: app/templates/topup/client_topup.html:124
-msgid "Total Points"
-msgstr "合計ポイント"
-
-#: app/templates/mail/payment_succeed.html:285
-msgid "TOTAL"
-msgstr "合計"
-
-#: app/templates/mail/payment_succeed.html:296
-#, 
-msgid "Pay With : "
-msgstr "支払い方法："
-
-#: app/templates/mail/payment_succeed.html:314
-#, 
-msgid "Previous Points"
-msgstr "チャージ前ポイント"
-
-#: app/templates/mail/payment_succeed.html:327
-#, 
-msgid "Current Points"
-msgstr "現在ポイント"
-
-#: app/templates/mail/payment_succeed.html:344
-msgid ""
-"If you have any questions, just reply to this email—we're always happy to"
-" help out."
-msgstr "ご不明な点がございましたら、このメールに返信してください。いつでも喜んでお手伝いさせていただきます。"
-
-#: app/templates/mail/payment_succeed.html:350
-msgid "Thanks for choosing our service,"
-msgstr "弊社のサービスをご利用いただき、ありがとうございます。"
-
-#: app/templates/mail/payment_succeed.html:350
-msgid "Cosy Business Hub Team"
-msgstr "Cosy Business Hub チーム"
-
-#: app/templates/mail/payment_succeed.html:371
-msgid "3-2-5 Hachimandori Chuo-ku, Kobe-shi"
-msgstr "神戸市中央区八幡通3丁目2番5号"
-
-#: app/templates/mail/payment_succeed.html:371
-msgid "651-0085"
-msgstr "651-0085"
-
-#: app/templates/mail/payment_succeed.html:371
-msgid "IN Toyo Building 9F"
-msgstr "IN東洋ビル 9F"
-
-#: app/templates/settings/login.html:84
-msgid "Paypay Configuration Login"
-msgstr "PayPay設定ログイン"
-
-#: app/templates/settings/login.html:89
+#: app/templates/table/monshinhyou.html:86
+#: app/templates/table/syokaijou.html:86
 msgid "Username"
-msgstr "ユーザー名"
+msgstr "ユーザ名"
 
-#: app/templates/settings/login.html:90
-msgid "Please enter the correct username"
-msgstr "正しいユーザー名を入力してください"
+#: app/templates/table/monshinhyou.html:87
+#: app/templates/table/syokaijou.html:87
+msgid "Date"
+msgstr "日付"
 
-#: app/templates/settings/login.html:93
-msgid "Password"
-msgstr "パスワード"
+#: app/templates/table/monshinhyou.html:88
+msgid "Patient Name"
+msgstr "患者名"
 
-#: app/templates/settings/login.html:95
-msgid "Please enter the correct password"
-msgstr "正しいパスワードを入力してください"
+#: app/templates/table/monshinhyou.html:89
+msgid "Birthday"
+msgstr "生年月日"
 
-#: app/templates/settings/login.html:96
-msgid "Display"
+#: app/templates/table/monshinhyou.html:90
+msgid "Symptoms"
+msgstr "自覚症状"
+
+#: app/templates/table/monshinhyou.html:91
+msgid "Currently Treated Illness"
+msgstr "治療中の病気"
+
+#: app/templates/table/monshinhyou.html:92
+msgid "Medication"
+msgstr "服用薬"
+
+#: app/templates/table/monshinhyou.html:93
+msgid "Food Allergies"
+msgstr "食品アレルギー"
+
+#: app/templates/table/monshinhyou.html:94
+msgid "Drug Allergies"
+msgstr "薬品アレルギー"
+
+#: app/templates/table/monshinhyou.html:95
+msgid "Medical History"
+msgstr "手術または入院歴"
+
+#: app/templates/table/monshinhyou.html:96
+msgid "Drinking Habits"
+msgstr "飲酒習慣"
+
+#: app/templates/table/monshinhyou.html:97
+msgid "Smoking Habits"
+msgstr "喫煙習慣"
+
+#: app/templates/table/monshinhyou.html:106
+msgid "View"
 msgstr "表示"
 
-#: app/templates/settings/login.html:101
-msgid "Login"
-msgstr "ログイン"
-
-#: app/templates/settings/setting.html:66
-msgid "Success !"
-msgstr "成功！"
-
-#: app/templates/settings/setting.html:77
-#: app/templates/settings/setting.html:98
-#: app/templates/settings/setting.html:499
-#: app/templates/settings/setting.html:537
-msgid "Close"
-msgstr "閉じる"
-
-#: app/templates/settings/setting.html:87
-msgid "Failed !"
-msgstr "失敗！"
-
-#: app/templates/settings/setting.html:108
-msgid "PaperCut Connection Configuration"
-msgstr "PaperCut接続設定"
-
-#: app/templates/settings/setting.html:110
-msgid "Download Application Logs"
-msgstr "アプリケーションログをダウンロード"
-
-#: app/templates/settings/setting.html:116
-msgid "PaperCut Server"
-msgstr "PaperCutサーバー"
-
-#: app/templates/settings/setting.html:118
-msgid "Enter the correct PaperCut Primary Server"
-msgstr "正しいPaperCutプライマリサーバーを入力してください"
-
-#: app/templates/settings/setting.html:121
-msgid "PaperCut Auth Token"
-msgstr "PaperCut認証トークン"
-
-#: app/templates/settings/setting.html:124
-msgid "Enter the correct PaperCut Auth Token"
-msgstr "正しいPaperCut認証トークンを入力してください"
-
-#: app/templates/settings/setting.html:127
-#: app/templates/settings/setting.html:202
-#: app/templates/settings/setting.html:209
-#: app/templates/settings/setting.html:216
-msgid "Preview"
-msgstr "プレビュー"
-
-#: app/templates/settings/setting.html:132
-msgid "Update PaperCut Connection Settings"
-msgstr "PaperCut接続設定を更新"
-
-#: app/templates/settings/setting.html:138
-msgid "Payment Provider & Multiple Personal Account"
-msgstr "決済プロバイダーと複数の個人アカウント"
-
-#: app/templates/settings/setting.html:143
-msgid "Choose Your Payment Gateway"
-msgstr "決済ゲートウェイを選択"
-
-# topup/client_topup translation start
-#: app/templates/settings/setting.html:145
-#: app/templates/settings/setting.html:348
-#: app/templates/topup/client_topup.html:136
-msgid "PayPay"
-msgstr "PayPay"
-
-#: app/templates/settings/setting.html:146
-msgid "SB Payment"
-msgstr "SBペイメント"
-
-#: app/templates/settings/setting.html:147
-msgid "GMO"
-msgstr "GMO"
-
-#: app/templates/settings/setting.html:159
-msgid ""
-"Credit the points to multiple personal account (PaperCut Advanced "
-"Settings)"
-msgstr "ポイントを複数の個人アカウントにチャージする（PaperCutの詳細設定）"
-
-#: app/templates/settings/setting.html:170
-msgid "Charge to this personal account"
-msgstr "この個人アカウントに請求する"
-
-#: app/templates/settings/setting.html:171
-#: app/templates/settings/setting.html:172
-msgid "Enter the desired personal account"
-msgstr "希望する個人アカウントを入力してください"
-
-#: app/templates/settings/setting.html:173
-msgid "Please enter the exact name of the personal account (case sensitive)"
-msgstr "個人アカウントの正確な名前を入力してください（大文字と小文字が区別されます）"
-
-#: app/templates/settings/setting.html:179
-msgid "Update Top-Up Transaction Settings"
-msgstr "チャージ取引設定を更新"
-
-#: app/templates/settings/setting.html:195
-msgid "PayPay Connection Settings"
-msgstr "PayPay接続設定"
-
-# topup/client_topup translation start
-#: app/templates/settings/setting.html:199
-msgid "PayPay API Key"
-msgstr "PayPay APIキー"
-
-#: app/templates/settings/setting.html:201
-msgid "Please enter the correct Paypay API Key"
-msgstr "正しいPayPay APIキーを入力してください"
-
-#: app/templates/settings/setting.html:206
-msgid "PayPay APIシークレット"
-msgstr "PayPay APIシークレット"
-
-#: app/templates/settings/setting.html:208
-msgid "正しい PayPayのAPIシークレット を入力してください"
-msgstr "正しいPayPayのAPIシークレットを入力してください"
-
-#: app/templates/settings/setting.html:213
-msgid "PayPay マーチャントの識別子(merchantID)"
-msgstr "PayPayマーチャント識別子(merchantID)"
-
-#: app/templates/settings/setting.html:215
-msgid "正しい PayPayのマーチャントID を入力してください"
-msgstr "正しいPayPayのマーチャントIDを入力してください"
-
-#: app/templates/settings/setting.html:221
-msgid "Update PayPay Connection Settings"
-msgstr "PayPay接続設定を更新"
-
-#: app/templates/settings/setting.html:237
-msgid "SB Payment Integration Settings"
-msgstr "SBペイメント連携設定"
-
-#: app/templates/settings/setting.html:241
-msgid "Merchant ID"
-msgstr "マーチャントID"
-
-#: app/templates/settings/setting.html:243
-msgid "正しい SB PaymentのショップID を入力してください"
-msgstr "正しいSBペイメントのショップIDを入力してください"
-
-#: app/templates/settings/setting.html:244
-#: app/templates/settings/setting.html:251
-#: app/templates/settings/setting.html:258
-#: app/templates/settings/setting.html:287
-#: app/templates/settings/setting.html:294
-msgid "表示"
-msgstr "表示"
-
-#: app/templates/settings/setting.html:248
-msgid "Service ID"
-msgstr "サービスID"
-
-#: app/templates/settings/setting.html:250
-#: app/templates/settings/setting.html:257
-msgid "正しい SB Paymentのショップパスワード を入力してください"
-msgstr "正しいSBペイメントのショップパスワードを入力してください"
-
-#: app/templates/settings/setting.html:255
-msgid "SB Payment Hash Key"
-msgstr "SBペイメントハッシュキー"
-
-#: app/templates/settings/setting.html:264
-msgid "Apply Changes to SB Payment"
-msgstr "SBペイメントへの変更を適用"
-
-#: app/templates/settings/setting.html:280
-msgid "GMO Integration Settings"
-msgstr "GMO連携設定"
-
-#: app/templates/settings/setting.html:284
-msgid "GMO Shop ID"
-msgstr "GMOショップID"
-
-#: app/templates/settings/setting.html:286
-msgid "正しい GMOのショップID を入力してください"
-msgstr "正しいGMOのショップIDを入力してください"
-
-#: app/templates/settings/setting.html:291
-msgid "GMO Shop Password"
-msgstr "GMOショップパスワード"
-
-#: app/templates/settings/setting.html:293
-msgid "正しい GMOのショップパスワード を入力してください"
-msgstr "正しいGMOのショップパスワードを入力してください"
-
-#: app/templates/settings/setting.html:298
-msgid "GMO Payment Method"
-msgstr "GMO決済方法"
-
-#: app/templates/settings/setting.html:299
-msgid "Card Payment"
-msgstr "カード決済"
-
-#: app/templates/settings/setting.html:309
-msgid "Credit Card"
-msgstr "クレジットカード"
-
-#: app/templates/settings/setting.html:321
-msgid "Apple Pay"
-msgstr "Apple Pay"
-
-#: app/templates/settings/setting.html:333
-msgid "Google Pay"
-msgstr "Google Pay"
-
-#: app/templates/settings/setting.html:338
-msgid "電子ウオレット決済"
-msgstr "電子ウォレット決済"
-
-#: app/templates/settings/setting.html:360
-msgid "Au Pay"
-msgstr "au Pay"
-
-#: app/templates/settings/setting.html:372
-msgid "楽天ペイ (Rakuten Pay)"
-msgstr "楽天ペイ"
-
-#: app/templates/settings/setting.html:384
-msgid "d払い (dPay)"
-msgstr "d払い"
-
-#: app/templates/settings/setting.html:396
-msgid "メルペイ(MerPay)"
-msgstr "メルペイ"
-
-#: app/templates/settings/setting.html:404
-msgid "GMO接続設定を更新する"
-msgstr "GMO接続設定を更新する"
-
-#: app/templates/settings/setting.html:421
-msgid "Point Charge Transaction Settings"
-msgstr "ポイントチャージ取引設定"
-
-#: app/templates/settings/setting.html:423
-msgid "Transaction Logs"
-msgstr "取引ログ"
-
-#: app/templates/settings/setting.html:426
-msgid "List of charge amount selection that will be displayed on the user screen."
-msgstr "ユーザー画面に表示されるチャージ金額選択リスト。CSV設定ファイルのサンプルをダウンロードするには、"
-
-#: app/templates/settings/setting.html:430
-msgid "Add new pricing"
-msgstr "新しい価格設定を追加"
-
-#: app/templates/settings/setting.html:440
-#: app/templates/settings/setting.html:486
-#: app/templates/settings/setting.html:524
-msgid "Price (￥)"
-msgstr "価格 (￥)"
-
-#: app/templates/settings/setting.html:475
-msgid "Add New Pricing Modal"
-msgstr "新しい価格のポップアップ"
-
-#: app/templates/settings/setting.html:500
-msgid "Save"
-msgstr "保存"
-
-#: app/templates/settings/setting.html:512
-msgid "Delete Price"
-msgstr "価格を削除"
-
-#: app/templates/settings/setting.html:520
-msgid "Are you sure to delete the selected price?"
-msgstr "選択した価格を削除してもよろしいですか?"
-
-#: app/templates/settings/setting.html:538
-msgid "Delete"
-msgstr "削除"
-
-# templates/settings translation end
-# topup/client_topup translation start
-#: app/templates/topup/client_topup.html:15
-msgid "PayPay Points Charge"
-msgstr "PayPayポイントチャージ"
-
-#: app/templates/topup/client_topup.html:38
-msgid "PaperCut Points Charge"
-msgstr "PaperCutポイントチャージ"
-
-#: app/templates/topup/client_topup.html:86
-msgid "Hello"
-msgstr "こんにちは"
-
-#: app/templates/topup/client_topup.html:87
-msgid "Welcome to the PaperCut Points Charging Page!"
-msgstr "PaperCutポイントチャージページへようこそ！"
-
-#: app/templates/topup/client_topup.html:102
-msgid "PaperCut Points Purchase"
-msgstr "PaperCutポイント購入"
-
-#: app/templates/topup/client_topup.html:108
-msgid "Example select"
-msgstr "選択の例"
-
-#: app/templates/topup/client_topup.html:122
+#: app/templates/table/monshinhyou.html:135
+msgid "Details"
+msgstr "詳細"
+
+#: app/templates/table/monshinhyou.html:145
+msgid "Open"
+msgstr "開く"
+
+#: app/templates/table/syokaijou.html:88
+msgid "Disease Name"
+msgstr "病名"
+
+#: app/templates/table/syokaijou.html:89
+msgid "Purpose of Introduction"
+msgstr "紹介目的"
+
+#: app/templates/table/syokaijou.html:90
 msgid "Summary"
-msgstr "概要"
+msgstr "紹介要約"
 
-#: app/templates/topup/client_topup.html:125
-#: app/templates/topup/client_topup.html:142
-msgid "Total Payment"
-msgstr "合計金額"
-
-#: app/templates/topup/client_topup.html:132
-msgid "Payment"
-msgstr "支払い"
-
-#: app/templates/topup/client_topup.html:149
-msgid "Continue to PayPay Payment Page"
-msgstr "PayPayの支払いページへ進む"
-
-#: app/templates/topup/client_topup.html:202
-msgid "All Rights Reserved By"
-msgstr "全著作権所有："
+#: app/templates/table/syokaijou.html:91
+msgid "File Location"
+msgstr "ファイルの場所"
 
 #: venv/Lib/site-packages/click/_termui_impl.py:556
 #, python-brace-format
@@ -1351,4 +679,585 @@ msgstr ""
 
 #~ msgid "Upload settings"
 #~ msgstr "設定をアップロード"
+
+#~ msgid "Logged Out"
+#~ msgstr "ログアウトされました"
+
+#~ msgid "Logout"
+#~ msgstr "ログアウト"
+
+#~ msgid "Success updating selected provider"
+#~ msgstr "選択されたプロバイダーの更新に成功しました"
+
+#~ msgid "Success updating PaperCut Default Configuration"
+#~ msgstr "PaperCut既定設定の更新に成功しました"
+
+#~ msgid ""
+#~ "Cannot connect to PaperCut Primary "
+#~ "Server. Please check the configuration "
+#~ "file."
+#~ msgstr "PaperCutプライマリサーバーに接続できません。設定ファイルを確認してください。"
+
+#~ msgid "Login success"
+#~ msgstr "ログイン成功"
+
+#~ msgid "Wrong Password"
+#~ msgstr "パスワードが違います"
+
+#~ msgid "Wrong Username"
+#~ msgstr "ユーザー名が違います"
+
+#~ msgid ""
+#~ "Cannot connect to PaperCut Primary "
+#~ "Server. Please contact your administrator."
+#~ msgstr "PaperCutプライマリサーバーに接続できません。管理者にお問い合わせください。"
+
+#~ msgid ""
+#~ "User is not registered in PaperCut. "
+#~ "Please contact your administrator, or "
+#~ "access the top-up page from the"
+#~ " PaperCut Portal."
+#~ msgstr "ユーザーはPaperCutに登録されていません。管理者にお問い合わせいただくか、PaperCutポータルからチャージページにアクセスしてください。"
+
+#~ msgid "Success updating PayPay integration settings"
+#~ msgstr "PayPay連携設定の更新に成功しました"
+
+# controllers/all_controller translation end
+# controllers/paypay_controller translation start
+#~ msgid "Top up amount should be more than or equal with the Minimum Purchase ("
+#~ msgstr "チャージ額は最低購入額（"
+
+#~ msgid "Top up amount should be less than or equal with the Maximum Purchase ("
+#~ msgstr "チャージ額は最大購入額（"
+
+#~ msgid ""
+#~ "User is not registered in PaperCut. "
+#~ "Please contact your administrator, or "
+#~ "access the top-up page from "
+#~ "PaperCut Portal."
+#~ msgstr "ユーザーはPaperCutに登録されていません。管理者にお問い合わせいただくか、PaperCutポータルからチャージページにアクセスしてください。"
+
+#~ msgid ""
+#~ "The top up amount is not "
+#~ "registered in the settings. Please "
+#~ "contact your administrator."
+#~ msgstr "このチャージ額は設定に登録されていません。管理者にお問い合わせください。"
+
+#~ msgid "API issue, cannot find the transaction in PayPay server."
+#~ msgstr "APIの問題により、PayPayサーバーで取引が見つかりません。"
+
+#~ msgid "Papercut Points Purchase Success Notification"
+#~ msgstr "PaperCutポイント購入成功通知"
+
+#~ msgid "Cannot find the transaction with this merch ID"
+#~ msgstr "このマーチャントIDを持つ取引が見つかりません"
+
+#~ msgid ""
+#~ "This transaction has already been "
+#~ "completed, please check the log on "
+#~ "PaperCut."
+#~ msgstr "この取引はすでに完了しています。PaperCutのログを確認してください。"
+
+#~ msgid "Cancelled. Please close this tab/window and return to PaperCut"
+#~ msgstr "キャンセルされました。このタブ/ウィンドウを閉じてPaperCutに戻ってください"
+
+#~ msgid ""
+#~ "API issue, incomplete transaction. Point "
+#~ "charge has been cancelled. The screen"
+#~ " will change to Papercut user "
+#~ "interface after 5 seconds"
+#~ msgstr "APIの問題により、取引が不完全です。ポイントチャージはキャンセルされました。5秒後にPaperCutユーザーインターフェースに画面が切り替わります。"
+
+#~ msgid "Error accessing the URL"
+#~ msgstr "URLへのアクセスエラー"
+
+#~ msgid "Success updating SB Payment integration settings"
+#~ msgstr "SB-Payment連携設定の更新に成功しました"
+
+#~ msgid "Papercut Points Purchase Failed Notification"
+#~ msgstr "PaperCutポイント購入成功通知"
+
+#~ msgid ""
+#~ "Cannot find the price configuration "
+#~ "file. Using the template file, please"
+#~ " upload a new csv file containing "
+#~ "the configuration."
+#~ msgstr "価格設定ファイルが見つかりません。テンプレートファイルを使用して、設定を含む新しいCSVファイルをアップロードしてください。"
+
+#~ msgid ""
+#~ "The file name is not as expected,"
+#~ " please set the file name to "
+#~ "point_price.csv"
+#~ msgstr "ファイル名が想定と異なります。ファイル名を point_price.csv に設定してください。"
+
+#~ msgid "Please provide only integer values without any spaces."
+#~ msgstr "スペースを入れずに整数値のみを入力してください。"
+
+#~ msgid "Success updating PaperCut Points Pricing"
+#~ msgstr "PaperCut支払い設定の更新に成功しました"
+
+#~ msgid ""
+#~ "Failed updating PaperCut Points Pricing. "
+#~ "Please check your uploaded file type."
+#~ msgstr "PaperCut支払い設定の更新に失敗しました。アップロードされたファイルの種類を確認してください。"
+
+#~ msgid "Success deleting PaperCut Points Pricing"
+#~ msgstr "PaperCut支払い設定の更新に成功しました"
+
+#~ msgid "There are error in SB Payment parameters. Changes are not saved."
+#~ msgstr "SB Paymentパラメータにエラーがあります。変更は保存されません。"
+
+#~ msgid "PaperCut Server connection is not configured yet"
+#~ msgstr "PaperCutサーバ接続はまだ設定されていません"
+
+#~ msgid "Cannot connect to PaperCut Primary Server"
+#~ msgstr "PaperCutプライマリサーバーに接続できません。"
+
+# controllers/paypay_controller translation end
+# routers/web_router translation start
+#~ msgid ""
+#~ "Cannot find the price configuration "
+#~ "file, please upload a new csv file"
+#~ " containing the configuration."
+#~ msgstr "価格設定ファイルが見つかりません。設定を含む新しいCSVファイルをアップロードしてください。"
+
+#~ msgid "Only PaperCut administrator can access the settings page."
+#~ msgstr ""
+
+#~ msgid "Cannot connect to PaperCut Primary Server. Changes are not saved."
+#~ msgstr "PaperCutプライマリサーバーに接続できません。変更は保存されませんでした。"
+
+#~ msgid ""
+#~ "Connected to PaperCut Primary Server, "
+#~ "but wrong Auth Token. Changes are "
+#~ "not saved"
+#~ msgstr "PaperCutプライマリサーバーに接続しましたが、認証トークンが間違っています。変更は保存されません。"
+
+#~ msgid "An error occured. Please check your connection."
+#~ msgstr "エラーが発生しました。接続を確認してください。"
+
+#~ msgid "An error occured. Cannot obtain any transaction."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Unable to create PayPay Client "
+#~ "connection. Incorrect PayPay credentials. "
+#~ "Changes are not saved."
+#~ msgstr "PayPayクライアント接続を作成できません。PayPayの認証情報が間違っています。変更は保存されませんでした。"
+
+# templates/alert/success translation end
+# templates/settings/login translation start
+#~ msgid "Back to PaperCut"
+#~ msgstr "PaperCutに戻る"
+
+# routers/web_router translation end
+# templates/alert/success translation end
+#~ msgid "Payment Success!"
+#~ msgstr "支払い成功！"
+
+#~ msgid "Points has been added to your PaperCut Account."
+#~ msgstr "PaperCutアカウントにポイントが追加されました。"
+
+#~ msgid "Transaction Summary"
+#~ msgstr "取引概要"
+
+#~ msgid "Payment Amount"
+#~ msgstr "支払い金額"
+
+#~ msgid "Points Balance Before Charging"
+#~ msgstr "チャージ前のポイント残高"
+
+#~ msgid "Charge Points"
+#~ msgstr "チャージポイント"
+
+#~ msgid "Points Balance After Charging"
+#~ msgstr "チャージ後のポイント残高"
+
+# templates/settings/login translation end
+# templates/settings translation start
+#~ msgid "Payment System Transaction Logs"
+#~ msgstr "決済システムの取引ログ"
+
+# templates/settings/login translation end
+# templates/settings translation start
+#~ msgid "Payment System Configuration"
+#~ msgstr "決済システム設定"
+
+#~ msgid "Back to Settings Page"
+#~ msgstr "設定ページへ戻る"
+
+#~ msgid "Transaction Logs Table"
+#~ msgstr "取引ログの表"
+
+#~ msgid "Download Transaction Logs"
+#~ msgstr "取引ログをダウンロード"
+
+#~ msgid "Last Update"
+#~ msgstr "更新日時"
+
+#~ msgid "Created At"
+#~ msgstr "作成日時"
+
+#~ msgid "Expired At"
+#~ msgstr "有効期限"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Status"
+#~ msgstr "ステータス"
+
+#~ msgid "Account"
+#~ msgstr "アカウント"
+
+#~ msgid "Points"
+#~ msgstr "ポイント"
+
+#~ msgid "Price"
+#~ msgstr "価格 (￥)"
+
+#~ msgid "104 loram ipusm"
+#~ msgstr "104 loram ipusm"
+
+#~ msgid "( +01 1234567890 )"
+#~ msgstr "( +01 1234567890 )"
+
+#~ msgid "demo@gmail.com"
+#~ msgstr "demo@gmail.com"
+
+#~ msgid "An Error Occured during Point Charging"
+#~ msgstr "ポイントチャージ中にエラーが発生しました"
+
+#~ msgid "There is a problem with the transaction below"
+#~ msgstr "以下の取引に問題があります"
+
+#~ msgid "PaperCut Username: "
+#~ msgstr "PaperCutユーザ名:"
+
+#~ msgid "Purchased Points: "
+#~ msgstr "購入ポイント:"
+
+#~ msgid "Purchase Price: "
+#~ msgstr "購入金額:"
+
+#~ msgid "Transaction ID: "
+#~ msgstr "取引ID:"
+
+#~ msgid "Payment Method: "
+#~ msgstr "支払い方法"
+
+#~ msgid "Click on the button below to check all of the transactions log"
+#~ msgstr "すべての取引ログを確認するには、下のボタンをクリックしてください。"
+
+#~ msgid "Go to transactions log"
+#~ msgstr "取引ログページに移動"
+
+#~ msgid ""
+#~ "If\n"
+#~ ""
+#~ "                                                                                "
+#~ "the button is not working, please "
+#~ "click\n"
+#~ ""
+#~ "                                                                                "
+#~ "or copy and paste this link on "
+#~ "your\n"
+#~ ""
+#~ "                                                                                "
+#~ "browser"
+#~ msgstr ""
+
+#~ msgid "Thank You for Paying your Purchase Transaction ! Here is the receipt"
+#~ msgstr "お買い上げいただきありがとうございます。領収書はこちらです。"
+
+#~ msgid "Thank You for Your Purchase!"
+#~ msgstr "ご購入いただきありがとうございます！"
+
+#~ msgid "Your purchase for papercut points is successful using"
+#~ msgstr "PaperCutポイントのご購入は、%sを利用して完了しました。"
+
+#~ msgid "Order Confirmation #"
+#~ msgstr "注文確認番号"
+
+#~ msgid "Purchase Amount"
+#~ msgstr "購入金額"
+
+#~ msgid "Conversion"
+#~ msgstr "換算"
+
+#~ msgid "Total Points"
+#~ msgstr "合計ポイント"
+
+#~ msgid "TOTAL"
+#~ msgstr "合計"
+
+#~ msgid "Pay With : "
+#~ msgstr "支払い方法："
+
+#~ msgid "Previous Points"
+#~ msgstr "チャージ前ポイント"
+
+#~ msgid "Current Points"
+#~ msgstr "現在ポイント"
+
+#~ msgid ""
+#~ "If you have any questions, just "
+#~ "reply to this email—we're always happy"
+#~ " to help out."
+#~ msgstr "ご不明な点がございましたら、このメールに返信してください。いつでも喜んでお手伝いさせていただきます。"
+
+#~ msgid "Thanks for choosing our service,"
+#~ msgstr "弊社のサービスをご利用いただき、ありがとうございます。"
+
+#~ msgid "Cosy Business Hub Team"
+#~ msgstr "Cosy Business Hub チーム"
+
+#~ msgid "3-2-5 Hachimandori Chuo-ku, Kobe-shi"
+#~ msgstr "神戸市中央区八幡通3丁目2番5号"
+
+#~ msgid "651-0085"
+#~ msgstr "651-0085"
+
+#~ msgid "IN Toyo Building 9F"
+#~ msgstr "IN東洋ビル 9F"
+
+#~ msgid "Paypay Configuration Login"
+#~ msgstr "PayPay設定ログイン"
+
+#~ msgid "Please enter the correct username"
+#~ msgstr "正しいユーザー名を入力してください"
+
+#~ msgid "Password"
+#~ msgstr "パスワード"
+
+#~ msgid "Please enter the correct password"
+#~ msgstr "正しいパスワードを入力してください"
+
+#~ msgid "Display"
+#~ msgstr "表示"
+
+#~ msgid "Login"
+#~ msgstr "ログイン"
+
+#~ msgid "Success !"
+#~ msgstr "成功！"
+
+#~ msgid "Close"
+#~ msgstr "閉じる"
+
+#~ msgid "Failed !"
+#~ msgstr "失敗！"
+
+#~ msgid "PaperCut Connection Configuration"
+#~ msgstr "PaperCut接続設定"
+
+#~ msgid "Download Application Logs"
+#~ msgstr "アプリケーションログをダウンロード"
+
+#~ msgid "PaperCut Server"
+#~ msgstr "PaperCutサーバー"
+
+#~ msgid "Enter the correct PaperCut Primary Server"
+#~ msgstr "正しいPaperCutプライマリサーバーを入力してください"
+
+#~ msgid "PaperCut Auth Token"
+#~ msgstr "PaperCut認証トークン"
+
+#~ msgid "Enter the correct PaperCut Auth Token"
+#~ msgstr "正しいPaperCut認証トークンを入力してください"
+
+#~ msgid "Update PaperCut Connection Settings"
+#~ msgstr "PaperCut接続設定を更新"
+
+#~ msgid "Payment Provider & Multiple Personal Account"
+#~ msgstr "決済プロバイダーと複数の個人アカウント"
+
+#~ msgid "Choose Your Payment Gateway"
+#~ msgstr "決済ゲートウェイを選択"
+
+# topup/client_topup translation start
+#~ msgid "PayPay"
+#~ msgstr "PayPay"
+
+#~ msgid "SB Payment"
+#~ msgstr "SBペイメント"
+
+#~ msgid "GMO"
+#~ msgstr "GMO"
+
+#~ msgid ""
+#~ "Credit the points to multiple personal"
+#~ " account (PaperCut Advanced Settings)"
+#~ msgstr "ポイントを複数の個人アカウントにチャージする（PaperCutの詳細設定）"
+
+#~ msgid "Charge to this personal account"
+#~ msgstr "この個人アカウントに請求する"
+
+#~ msgid "Enter the desired personal account"
+#~ msgstr "希望する個人アカウントを入力してください"
+
+#~ msgid "Please enter the exact name of the personal account (case sensitive)"
+#~ msgstr "個人アカウントの正確な名前を入力してください（大文字と小文字が区別されます）"
+
+#~ msgid "Update Top-Up Transaction Settings"
+#~ msgstr "チャージ取引設定を更新"
+
+#~ msgid "PayPay Connection Settings"
+#~ msgstr "PayPay接続設定"
+
+# topup/client_topup translation start
+#~ msgid "PayPay API Key"
+#~ msgstr "PayPay APIキー"
+
+#~ msgid "Please enter the correct Paypay API Key"
+#~ msgstr "正しいPayPay APIキーを入力してください"
+
+#~ msgid "PayPay APIシークレット"
+#~ msgstr "PayPay APIシークレット"
+
+#~ msgid "正しい PayPayのAPIシークレット を入力してください"
+#~ msgstr "正しいPayPayのAPIシークレットを入力してください"
+
+#~ msgid "PayPay マーチャントの識別子(merchantID)"
+#~ msgstr "PayPayマーチャント識別子(merchantID)"
+
+#~ msgid "正しい PayPayのマーチャントID を入力してください"
+#~ msgstr "正しいPayPayのマーチャントIDを入力してください"
+
+#~ msgid "Update PayPay Connection Settings"
+#~ msgstr "PayPay接続設定を更新"
+
+#~ msgid "SB Payment Integration Settings"
+#~ msgstr "SBペイメント連携設定"
+
+#~ msgid "Merchant ID"
+#~ msgstr "マーチャントID"
+
+#~ msgid "正しい SB PaymentのショップID を入力してください"
+#~ msgstr "正しいSBペイメントのショップIDを入力してください"
+
+#~ msgid "表示"
+#~ msgstr "表示"
+
+#~ msgid "Service ID"
+#~ msgstr "サービスID"
+
+#~ msgid "正しい SB Paymentのショップパスワード を入力してください"
+#~ msgstr "正しいSBペイメントのショップパスワードを入力してください"
+
+#~ msgid "SB Payment Hash Key"
+#~ msgstr "SBペイメントハッシュキー"
+
+#~ msgid "Apply Changes to SB Payment"
+#~ msgstr "SBペイメントへの変更を適用"
+
+#~ msgid "GMO Integration Settings"
+#~ msgstr "GMO連携設定"
+
+#~ msgid "GMO Shop ID"
+#~ msgstr "GMOショップID"
+
+#~ msgid "正しい GMOのショップID を入力してください"
+#~ msgstr "正しいGMOのショップIDを入力してください"
+
+#~ msgid "GMO Shop Password"
+#~ msgstr "GMOショップパスワード"
+
+#~ msgid "正しい GMOのショップパスワード を入力してください"
+#~ msgstr "正しいGMOのショップパスワードを入力してください"
+
+#~ msgid "GMO Payment Method"
+#~ msgstr "GMO決済方法"
+
+#~ msgid "Card Payment"
+#~ msgstr "カード決済"
+
+#~ msgid "Credit Card"
+#~ msgstr "クレジットカード"
+
+#~ msgid "Apple Pay"
+#~ msgstr "Apple Pay"
+
+#~ msgid "Google Pay"
+#~ msgstr "Google Pay"
+
+#~ msgid "電子ウオレット決済"
+#~ msgstr "電子ウォレット決済"
+
+#~ msgid "Au Pay"
+#~ msgstr "au Pay"
+
+#~ msgid "楽天ペイ (Rakuten Pay)"
+#~ msgstr "楽天ペイ"
+
+#~ msgid "d払い (dPay)"
+#~ msgstr "d払い"
+
+#~ msgid "メルペイ(MerPay)"
+#~ msgstr "メルペイ"
+
+#~ msgid "GMO接続設定を更新する"
+#~ msgstr "GMO接続設定を更新する"
+
+#~ msgid "Point Charge Transaction Settings"
+#~ msgstr "ポイントチャージ取引設定"
+
+#~ msgid "Transaction Logs"
+#~ msgstr "取引ログ"
+
+#~ msgid ""
+#~ "List of charge amount selection that "
+#~ "will be displayed on the user "
+#~ "screen."
+#~ msgstr "ユーザー画面に表示されるチャージ金額選択リスト。CSV設定ファイルのサンプルをダウンロードするには、"
+
+#~ msgid "Add new pricing"
+#~ msgstr "新しい価格設定を追加"
+
+#~ msgid "Price (￥)"
+#~ msgstr "価格 (￥)"
+
+#~ msgid "Add New Pricing Modal"
+#~ msgstr "新しい価格のポップアップ"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Delete Price"
+#~ msgstr "価格を削除"
+
+#~ msgid "Are you sure to delete the selected price?"
+#~ msgstr "選択した価格を削除してもよろしいですか?"
+
+# templates/settings translation end
+# topup/client_topup translation start
+#~ msgid "PayPay Points Charge"
+#~ msgstr "PayPayポイントチャージ"
+
+#~ msgid "PaperCut Points Charge"
+#~ msgstr "PaperCutポイントチャージ"
+
+#~ msgid "Hello"
+#~ msgstr "こんにちは"
+
+#~ msgid "Welcome to the PaperCut Points Charging Page!"
+#~ msgstr "PaperCutポイントチャージページへようこそ！"
+
+#~ msgid "PaperCut Points Purchase"
+#~ msgstr "PaperCutポイント購入"
+
+#~ msgid "Example select"
+#~ msgstr "選択の例"
+
+#~ msgid "Total Payment"
+#~ msgstr "合計金額"
+
+#~ msgid "Payment"
+#~ msgstr "支払い"
+
+#~ msgid "Continue to PayPay Payment Page"
+#~ msgstr "PayPayの支払いページへ進む"
+
+#~ msgid "All Rights Reserved By"
+#~ msgstr "全著作権所有："
 

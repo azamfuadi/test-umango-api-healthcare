@@ -1,9 +1,18 @@
 from app import app
 from app.controllers import all_controller
 from app.controllers.all_controller import token_required
-from flask import request, Blueprint, session, redirect, url_for
+from flask import request, Blueprint, session, redirect, url_for, render_template, send_from_directory
+import os
 
 allroute_blueprint = Blueprint("all_router", __name__)
+
+@app.route('/')
+def landingPage():
+    return render_template("index.html")
+
+@app.route('/preview/<filename>')
+def preview_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, mimetype='application/pdf')
 
 @app.route('/admin/setting', methods=['GET'])
 @token_required

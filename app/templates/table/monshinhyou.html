@@ -44,7 +44,9 @@
                     <a href="{{ url_for('introductionLetterPage') }}" class="dropdown-item">
                       {{_('Letter of Introduction')}} 
                     </a>
-                    
+                    <a href="{{ url_for('landingPage') }}" class="dropdown-item">
+                      {{_('Home')}} 
+                    </a>
               </div>
             </div>
             <div class="dropdown">
@@ -73,9 +75,9 @@
           <h2 class="custom_heading">
             {{_('Medical Questionnaire List')}}
           </h2>
-            <a href='/export-list-csv?document=monshinhyou' >
+            <!-- <a href='/export-list-csv?document=monshinhyou' >
                 <button type="button" class="btn btn-primary ml-3 mb-2">{{_('Export List')}}</button>
-            </a>
+            </a> -->
           <div class="ml-3 mr-3">
             <table id="example" class="display table table-small table-light table-bordered table-hover">
               <thead class="thead-dark">
@@ -87,19 +89,23 @@
                   <th scope="col">{{_('Birthday')}}</th>
                   <th scope="col">{{_('Symptoms')}}</th>
                   <th scope="col">{{_('Currently Treated Illness')}}</th>
-                  <th scope="col">{{_('Symptoms')}}</th>
+                  <th scope="col">{{_('Medication')}}</th>
                   <th scope="col">{{_('Food Allergies')}}</th>
                   <th scope="col">{{_('Drug Allergies')}}</th>
                   <th scope="col">{{_('Medical History')}}</th>
                   <th scope="col">{{_('Drinking Habits')}}</th>
                   <th scope="col">{{_('Smoking Habits')}}</th>
-                  <th scope="col">{{_('File Location')}}</th>
                 </tr>
               </thead>
               <tbody>
                 {% for data in monshinhyouList.data %}
                 <tr>
-                  <td>{{loop.index}}</td>
+                  <td>
+                    {{loop.index}} <br> 
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-file_location="{{data.file_location}}" data-file_url="{{ url_for('preview_file', filename=data.file_url) }}">
+                      {{_('View')}}
+                    </button>
+                  </td>
                   <td>{{data.username}}</td>
                   <td>{{data.date}}</td>
                   <td>{{data.patient_name}} ({{data.gender}})</td>
@@ -112,7 +118,6 @@
                   <td>{{data.medical_history}}</td>
                   <td>{{data.drinking_habits}}</td>
                   <td>{{data.smoking_habits}}</td>
-                  <td>{{data.file_location}}</td>
                 </tr>
                 {% endfor%}
               </tbody>
@@ -122,6 +127,26 @@
       </div>
     </div>
   </section>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{_('Details')}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="file_location">Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a class="btn btn-success" id="preview_button" href="" target="_blank" rel="noopener noreferrer">{{_('Open')}}</a> <br>
+      </div>
+    </div>
+  </div>
+</div>
 
 
   <footer class="container-fluid footer_section">
@@ -137,8 +162,21 @@
   <script src="{{ url_for('static',filename='js/settingpage/settingpage.js') }}"></script>
   <script src="{{ url_for('static',filename='js/datatables.min.js') }}"></script>
   <script>
+    //DataTable Scripts
     $('#example').DataTable( {
       order: [[0, 'asc']]
+    });
+
+    //Modal Scripts
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var file_location = button.data('file_location');
+      var file_url = button.data('file_url')
+
+      // Update the modal's content
+      var modal = $(this);
+      modal.find('.file_location').text(file_location);
+      document.getElementById("preview_button").href = file_url;
     });
   </script>
 
