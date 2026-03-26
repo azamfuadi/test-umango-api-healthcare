@@ -14,7 +14,6 @@ import base64
 from pyhanko.sign import signers, timestamps
 from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
 from pyhanko.sign.fields import SigSeedSubFilter
-from pyhanko_certvalidator import ValidationContext
 
 CERTIFICATES_PATH = join(dirname(dirname(realpath(__file__))), "certificates/")
 # Load signer from config
@@ -53,7 +52,7 @@ signature_meta = signers.PdfSignatureMetadata(
 
 #Obtaining the Syoukaijou details
 def checkMonshinhyouById(monshinhyouId):
-    selected_monshinhyou = db_session.query(monshinhyou).filter(monshinhyou.transaction_id == monshinhyouId).one()
+    selected_monshinhyou = db_session.query(monshinhyou).filter(monshinhyou.id == monshinhyouId).one()
     data = {
         'id': selected_monshinhyou.id,
         'created_at': selected_monshinhyou.created_at,
@@ -240,4 +239,24 @@ def addNewMonshinhyou(file_encryption, file, filename, username, date, patient_n
     response = jsonify(result)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
-        
+
+
+def deleteMonshinhyou(monshinhyou_id):
+    selected_monshinhyou = db_session.query(monshinhyou).filter(monshinhyou.id == monshinhyou_id).one()
+
+    #Removing PDF File
+    if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], selected_monshinhyou.file_url)):
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], selected_monshinhyou.file_url))
+        print("The file has been deleted successfully")
+
+    with session_scope() as session:
+        session.query(monshinhyou).filter(monshinhyou.id == monshinhyou_id).delete()
+    
+    result = {
+            # 'totalPurchase': totalPurchase,
+            'message': gettext('Success Medical Questionnaire'),
+            'code': '00'
+        }
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response

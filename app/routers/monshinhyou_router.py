@@ -55,3 +55,11 @@ def addMedicalQuestionnaire():
 @app.route("/api/get-all/medical-questionnaire")
 def getAllMedicalQuestionnaire():
     return monshinhyou_controller.getMonshinhyouList()
+
+@app.route("/api/delete/medical-questionnaire", methods=['POST'])
+@jwt_required()
+def deleteMedicalQuestionnaire():
+    if len(request.form) > 0:    
+        monshinhyou_id =  request.form["monshinhyou_id"]    
+        return monshinhyou_controller.deleteMonshinhyou(monshinhyou_id)
+        
