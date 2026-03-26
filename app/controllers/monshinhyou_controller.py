@@ -9,7 +9,47 @@ from werkzeug.utils import secure_filename
 from app.models.monshinhyou_model import tokyo, monshinhyou
 from app.controllers.all_controller import session_scope, allowed_file
 import os
+from os.path import join, dirname, realpath
 import base64
+from pyhanko.sign import signers, timestamps
+from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
+from pyhanko.sign.fields import SigSeedSubFilter
+from pyhanko_certvalidator import ValidationContext
+
+CERTIFICATES_PATH = join(dirname(dirname(realpath(__file__))), "certificates/")
+# Load signer from config
+signer = signers.SimpleSigner.load_pkcs12(
+    pfx_file=CERTIFICATES_PATH+'certificate.pfx',
+    passphrase=b"tamon100"
+)
+
+# Set up a timestamping client to fetch timestamps tokens
+timestamper = timestamps.HTTPTimeStamper(
+    url='http://tsa.example.com/timestampService'
+)
+
+# Settings for PAdES-LTA
+signature_meta = signers.PdfSignatureMetadata(
+    field_name='Signature', md_algorithm='sha256',
+    # Mark the signature as a PAdES signature
+    subfilter=SigSeedSubFilter.PADES,
+    # We'll also need a validation context
+    # to fetch & embed revocation info.
+    # validation_context=ValidationContext(allow_fetching=True),
+    # Embed relevant OCSP responses / CRLs (PAdES-LT)
+    # embed_validation_info=True,
+    # Tell pyHanko to put in an extra DocumentTimeStamp
+    # to kick off the PAdES-LTA timestamp chain.
+    use_pades_lta=True,
+    certify = True, #Set as a certified PDF
+)
+
+
+# signer = signers.SimpleSigner.load(
+#     CERTIFICATES_PATH+'private.key', CERTIFICATES_PATH+'certificate.crt',
+# )
+
+
 
 #Obtaining the Syoukaijou details
 def checkMonshinhyouById(monshinhyouId):
@@ -110,8 +150,9 @@ def addNewMonshinhyou(file_encryption, file, filename, username, date, patient_n
             else:
                 file_url = filename
                 print("The file does not exist!")
-        
-            with open(os.path.join(app.config['UPLOAD_FOLDER'], file_url), 'wb') as f:
+
+            #Temporary save the PDF source as an Input
+            with open(os.path.join(app.config['UPLOAD_FOLDER'], 'temp_'+file_url), 'wb') as f:
                 f.write(file_data)
         else: 
             print("No file uploaded")
@@ -120,14 +161,31 @@ def addNewMonshinhyou(file_encryption, file, filename, username, date, patient_n
             print(file.filename)
             filename = file.filename
             if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
-                print("The file has been deleted successfully")
                 file_url = specific_string_timestamp+"_"+filename
             else:
                 file_url = filename
                 print("The file does not exist!")
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_url))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'temp_'+file_url))
         else: 
             print("Unsupported file")
+
+    #Open the input PDF and certify it
+    with open(os.path.join(app.config['UPLOAD_FOLDER'], 'temp_'+file_url), 'rb') as inf:
+        w = IncrementalPdfFileWriter(inf)
+        out = signers.sign_pdf(
+            w,
+            signature_meta=signature_meta,
+            signer=signer,
+            # timestamper = timestamper,
+        )
+
+    #Removing the input file
+    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], 'temp_'+file_url))
+    print("The file has been deleted successfully")
+
+    #Saving the certified PDF file
+    with open(os.path.join(app.config['UPLOAD_FOLDER'], file_url), 'wb') as outf:
+        outf.write(out.getbuffer())
 
 
 

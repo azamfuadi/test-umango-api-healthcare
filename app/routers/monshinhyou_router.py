@@ -43,12 +43,12 @@ def addMedicalQuestionnaire():
         file_location = request.form["file_location"]
         file_encryption = request.form["file_encryption"]
 
-        if(file_encryption):
+        if(file_encryption == 'base64'):
             file = request.form["pdf_file"]
             filename = request.form["filename"]
         else:
             file = request.files['pdf_file']
-            filename = request.files['filename']    
+            filename = request.form['filename']    
         
         return monshinhyou_controller.addNewMonshinhyou(file_encryption, file, filename, username, date, patient_name, gender, birthday, symptoms, current_illness, medication, food_allergies, drug_allergies, medical_history, drinking_habits, smoking_habits, file_location)
     
