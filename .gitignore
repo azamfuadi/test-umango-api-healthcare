@@ -1,6 +1,9 @@
 #uploaded files
 app/static/uploads
 
+#database files
+./app/*.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

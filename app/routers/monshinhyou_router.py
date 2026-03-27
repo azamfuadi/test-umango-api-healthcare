@@ -47,8 +47,8 @@ def addMedicalQuestionnaire():
             file = request.form["pdf_file"]
             filename = request.form["filename"]
         else:
-            file = request.files['pdf_file']
-            filename = request.form['filename']    
+            file = request.files["pdf_file"]
+            filename = request.form["filename"]    
         
         return monshinhyou_controller.addNewMonshinhyou(file_encryption, file, filename, username, date, patient_name, gender, birthday, symptoms, current_illness, medication, food_allergies, drug_allergies, medical_history, drinking_habits, smoking_habits, file_location)
     
@@ -57,8 +57,8 @@ def getAllMedicalQuestionnaire():
     return monshinhyou_controller.getMonshinhyouList()
 
 @app.route("/api/delete/medical-questionnaire", methods=['POST'])
-@jwt_required()
 def deleteMedicalQuestionnaire():
+    print(request.form["monshinhyou_id"])
     if len(request.form) > 0:    
         monshinhyou_id =  request.form["monshinhyou_id"]    
         return monshinhyou_controller.deleteMonshinhyou(monshinhyou_id)

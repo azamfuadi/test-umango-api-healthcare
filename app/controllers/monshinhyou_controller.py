@@ -254,7 +254,7 @@ def deleteMonshinhyou(monshinhyou_id):
     
     result = {
             # 'totalPurchase': totalPurchase,
-            'message': gettext('Success Medical Questionnaire'),
+            'message': gettext('Success deleting Medical Questionnaire'),
             'code': '00'
         }
     response = jsonify(result)

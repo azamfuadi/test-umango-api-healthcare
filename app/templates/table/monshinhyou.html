@@ -71,6 +71,19 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 mt-3 mb-3">
+          <!-- Alert Message -->
+          <div id="alert-success" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+              <span id="alert-message"></span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div id="alert-failed" class="alert alert-danger alert alert-dismissible fade show" role="alert" style="display: none;">
+              <span id="alert-message"></span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
           <hr style="border: 0.5px solid white;">
           <h2 class="custom_heading">
             {{_('Medical Questionnaire List')}}
@@ -99,15 +112,15 @@
               </thead>
               <tbody>
                 {% for data in monshinhyouList.data %}
-                <tr>
+                <tr id="{{data.id}}">
                   <td>
                     {{loop.index}} <br> 
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-file_location="{{data.file_location}}" data-file_url="{{ url_for('preview_file', filename=data.file_url) }}">
                       {{_('View')}}
                     </button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" 
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" 
                       data-monshinhyou_id="{{ data.id }}" data-patient_name="{{ data.patient_name }}" data-birthday="{{data.birthday}}"
-                      data-date="{{data.date}}"
+                      data-date="{{data.date}}" data-url="{{ url_for('deleteMedicalQuestionnaire', monshinhyou_id=data.id) }}"
                     >
                       {{_('Delete')}}
                     </button>
@@ -136,7 +149,7 @@
 
 <!-- Modal for seeing the PDF details  -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{_('Details')}}</h5>
@@ -148,7 +161,7 @@
         <p class="file_location">Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_('Close')}}</button>
         <a class="btn btn-success" id="preview_button" href="" target="_blank" rel="noopener noreferrer">{{_('Open')}}</a> <br>
       </div>
     </div>
@@ -157,7 +170,7 @@
 
 <!-- Modal for delete confirmation -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{_('Delete')}}</h5>
@@ -166,11 +179,29 @@
         </button>
       </div>
       <div class="modal-body">
-        <p class="file_location">Modal body text goes here.</p>
+        <table class="delete_confirmation">
+          <tbody>
+            <tr>
+              <td>{{_('Date')}}</td>
+              <td id="confirm_date">{{_('Date')}}</td>
+            </tr>
+            <tr>
+              <td>{{_('Patient Name')}}</td>
+              <td id="confirm_name">{{_('Patient Name')}}</td>
+            </tr>
+            <tr>
+              <td>{{_('Birthday')}}</td>
+              <td id="confirm_birthday">{{_('Birthday')}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a class="btn btn-success" id="delete_button" href="" target="_blank" rel="noopener noreferrer">{{_('Open')}}</a> <br>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_('Close')}}</button>
+        <form id="deleteForm">
+          <input hidden type="text" id="monshinhyou_id" name="monshinhyou_id" value="">
+          <button class="btn btn-danger" id="delete_button" type="submit">{{_('Delete')}}</button>
+        </form>
       </div>
     </div>
   </div>
@@ -179,7 +210,8 @@
 
   <footer class="container-fluid footer_section">
     <p>
-      &copy; {{_('2014 All Rights Reserved By')}}
+      &copy;<script>document.write(new Date().getFullYear())</script>
+      {{_(' All Rights Reserved By')}}
       <a href="https://html.design/">COSY Inc</a>
     </p>
   </footer>
@@ -210,13 +242,48 @@
     //Modal Scripts
     $('#deleteModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget); // Button that triggered the modal
-      var file_location = button.data('file_location');
-      var file_url = button.data('file_url')
+      var monshinhyou_id = button.data('monshinhyou_id');
+      var patient_name = button.data('patient_name');
+      var birthday = button.data('birthday');
+      var date = button.data('date');
 
       // Update the modal's content
       var modal = $(this);
-      modal.find('.file_location').text(file_location);
-      document.getElementById("preview_button").href = file_url;
+      document.getElementById('monshinhyou_id').value = monshinhyou_id;
+      modal.find('#confirm_date').text(': '+date);
+      modal.find('#confirm_name').text(': '+patient_name);
+      modal.find('#confirm_birthday').text(': '+birthday);
+    });
+
+    //Delete monshinhyou scripts
+    document.getElementById('deleteForm').addEventListener('submit', async (e) => {
+      e.preventDefault(); // Prevent default form submission/page reload
+
+      const formData = new FormData();
+      const monshinhyou_id = document.getElementById('monshinhyou_id').value
+      formData.append('monshinhyou_id', monshinhyou_id);
+
+      // Send data to the Flask API endpoint
+      const response = await fetch('/api/delete/medical-questionnaire', {
+          method: 'POST',
+          body: formData
+      });
+
+      const result = await response.json();
+      if(result.message.toLowerCase().includes("success") || result.message.includes("成功")){
+        document.getElementById('alert-success').style.display = "block";
+        document.getElementById('alert-message').innerText = result.message;
+        const row = document.getElementById(monshinhyou_id);
+        if (row) {
+          row.remove();
+        }
+        $('#deleteModal').modal('hide');
+
+      } else {
+        document.getElementById('alert-failed').style.display = "block";
+        document.getElementById('alert-message').innerText = result.message;
+        $('#deleteModal').modal('hide');
+      }
     });
   </script>
 
