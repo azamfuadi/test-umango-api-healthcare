@@ -170,7 +170,7 @@ def addNewMonshinhyou(file_encryption, file, filename, username, date, patient_n
 
     #Open the input PDF and certify it
     with open(os.path.join(app.config['UPLOAD_FOLDER'], 'temp_'+file_url), 'rb') as inf:
-        w = IncrementalPdfFileWriter(inf)
+        w = IncrementalPdfFileWriter(inf, strict=False)
         out = signers.sign_pdf(
             w,
             signature_meta=signature_meta,
