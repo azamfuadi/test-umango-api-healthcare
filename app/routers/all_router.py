@@ -47,4 +47,17 @@ def adminUpdate():
 def set_language(lang):
     session['language'] = lang
     return redirect(request.referrer or url_for('index'))
+
+@app.route('/api/get/allpatients')
+def getAllPatientList():
+    return all_controller.getPatientList()
+
+@app.route('/api/get/searchpatient')
+def searchPatientByParams():
+    id = request.args.get('id', default='')
+    name = request.args.get('name', default='')
+    birthday = request.args.get('birthday', default='')
+    gender = request.args.get('gender', default='')
+    
+    return all_controller.findPatientByParams(id=id, name=name, birthday=birthday, gender=gender)
     

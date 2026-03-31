@@ -16,6 +16,39 @@ from flask_babel import gettext
 
 ru = u'\u30EB'
 
+patientList= [
+        {
+            'id': 'patient1231',
+            'name': '山田 健太',
+            'birthday': '昭59年3月15日',
+            'gender': '男'
+        },
+        {
+            'id': 'patient1232',
+            'name': '高橋 正人',
+            'birthday': '昭50年12月2日',
+            'gender': '男'
+        },
+        {
+            'id': 'patient1233',
+            'name': '佐藤 真理子',
+            'birthday': '平2年7月8日',
+            'gender': '女'
+        },
+        {
+            'id': 'patient1234',
+            'name': '中村 美咲',
+            'birthday': '平12年5月21日',
+            'gender': '女'
+        },
+        {
+            'id': 'patient1235',
+            'name': '山本健太',
+            'birthday': '平6年5月18日',
+            'gender': '男'
+        }
+    ]
+
 @contextmanager
 def session_scope():
     session = db_session()
@@ -106,4 +139,38 @@ def downloadApplicationLogs():
     
 
 
-        
+def getPatientList(): 
+    result = {
+        'message': gettext('Success loading patient list'),
+        'code': '01',
+        'data': patientList
+    }
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+
+def findPatientByParams(id, name, birthday, gender):
+    # search_result = [
+    #     patient for patient in patientList
+    #     if all(patient.get(k) == v for k, v in params.items())
+    # ]
+    search_result = [patient for patient in patientList 
+                     if id in patient['id'] and name in patient['name'] and birthday in patient['birthday'] and gender in patient['gender']
+                     ]
+    print(search_result)
+    message = ''
+    if len(search_result) == 0:
+        message += gettext('Patient not found')
+    else :
+        message += gettext('Patient found')
+    result = {
+        'message' : message,
+        'code': '01',
+        'data': search_result
+    }
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+    
